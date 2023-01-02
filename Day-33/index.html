@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://kit.fontawesome.com/e39c02655c.js" crossorigin="anonymous"></script>
+    <title>React-Day-01</title>
+</head>
+
+<body>
+    <h1>Day -33 - ReactJS Introduction</h1>
+
+
+    <div id="root"></div>
+    <div id="icon"></div>
+    <div id="text"></div>
+    <div id="image"></div>
+    <div id="selector"></div>
+    <script type="text/babel">
+
+        function Hello(){
+            return <h2> Hello React </h2>
+        }
+
+        function Text(){
+            return <p> My first time trying to do React </p>
+        }
+
+        function Image(){
+            return <img src="https://images.unsplash.com/photo-1672600938371-baf8622c4e19?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=846&q=80" />
+        }
+
+        function Icon(){
+            return <i class="fa-brands fa-github"></i>
+        }
+
+        function Selector(){
+            return <select>
+                <option>Beard Man</option>
+                <option>Snow Man</option>
+                </select>
+        }
+
+        ReactDOM.render(<Hello />, document.getElementById('root'))
+
+        ReactDOM.render(<Text />, document.getElementById('text'))
+
+        ReactDOM.render(<Image />, document.getElementById('image'))
+        ReactDOM.render(<Icon />, document.getElementById('icon'))
+        ReactDOM.render(<Selector />, document.getElementById('selector'))
+        
+
+
+    </script>
+
+   
+
+
+
+    <script crossorigin="" src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin="" src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+</body>
+
+</html>
