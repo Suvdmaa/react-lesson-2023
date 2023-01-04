@@ -7,14 +7,41 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 // import Product3 from './Product3'
 // import Product4 from './Product4';
 
+// import ProductFunc from './ProductFunc';
+// import ProductFunc2 from './ProductFunc2';
+// import ProductFunc3 from './ProductFunc3';
+// import ProductFunc4 from './ProductFunc4';
+
+import products from './Seed';
 import ProductFunc from './ProductFunc';
-import ProductFunc2 from './ProductFunc2';
-import ProductFunc3 from './ProductFunc3';
-import ProductFunc4 from './ProductFunc4';
+import Product from "./product"
 
 
 
 function App() {
+  const productList = products.map((product) =>{
+    return <ProductFunc 
+    title={product.title} 
+    id={product.id} 
+    number={product.number} 
+    description={product.description} 
+    url={product.votes} 
+    votes={product.votes} 
+    submitterAvatarUrl={product.submitterAvatarUrl} 
+    productImageUrl={product.productImageUrl}/>
+  })
+  const productList2 = products.map((product)=>{
+    return <Product
+    title={product.title} 
+    id={product.id} 
+    number={product.number} 
+    description={product.description} 
+    url={product.votes} 
+    votes={product.votes} 
+    submitterAvatarUrl={product.submitterAvatarUrl} 
+    productImageUrl={product.productImageUrl}/>
+  })
+  
   return (
     // <div className="App">
     //   <header className="App-header">
@@ -62,10 +89,13 @@ function App() {
         <Product2 />
         <Product3 />
         <Product4 /> */}
-        <ProductFunc />
+        {/* <ProductFunc />
         <ProductFunc2 />
         <ProductFunc3 />
-        <ProductFunc4 />
+        <ProductFunc4 /> */}
+
+        {/* {productList} */}
+        {productList2}
       </div>
     </div>
   );
