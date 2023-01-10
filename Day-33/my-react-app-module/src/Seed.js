@@ -12,6 +12,7 @@ const products = [
         votes: generateVoteCount(),
         submitterAvatarUrl: 'images/avatars/daniel.jpg',
         productImageUrl: 'images/products/image-aqua.png',
+        stars: 3,
     },
     {
         id: 2,
@@ -22,6 +23,7 @@ const products = [
         votes: generateVoteCount(),
         submitterAvatarUrl: 'images/avatars/kristy.png',
         productImageUrl: 'images/products/image-rose.png',
+        stars: 2,
     },
     {
         id: 3,
@@ -32,6 +34,8 @@ const products = [
         votes: generateVoteCount(),
         submitterAvatarUrl: 'images/avatars/veronika.jpg',
         productImageUrl: 'images/products/image-steel.png',
+        stars: 4,
+
     },
     {
         id: 4,
@@ -42,6 +46,7 @@ const products = [
         votes: generateVoteCount(),
         submitterAvatarUrl: 'images/avatars/molly.png',
         productImageUrl: 'images/products/image-yellow.png',
+        stars: 3,
     },
 ];
 

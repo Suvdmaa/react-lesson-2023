@@ -28,19 +28,21 @@ function App() {
     url={product.votes} 
     votes={product.votes} 
     submitterAvatarUrl={product.submitterAvatarUrl} 
-    productImageUrl={product.productImageUrl}/>
+    productImageUrl={product.productImageUrl}
+    stars={product.stars}/>
   })
-  const productList2 = products.map((product)=>{
-    return <Product
-    title={product.title} 
-    id={product.id} 
-    number={product.number} 
-    description={product.description} 
-    url={product.votes} 
-    votes={product.votes} 
-    submitterAvatarUrl={product.submitterAvatarUrl} 
-    productImageUrl={product.productImageUrl}/>
-  })
+  // const productList2 = products.map((product)=>{
+  //   return <Product
+  //   title={product.title} 
+  //   id={product.id} 
+  //   number={product.number} 
+  //   description={product.description} 
+  //   url={product.votes} 
+  //   votes={product.votes} 
+  //   submitterAvatarUrl={product.submitterAvatarUrl} 
+  //   productImageUrl={product.productImageUrl}
+  //   stars={product.stars}/>
+  // })
   
   return (
     // <div className="App">
@@ -94,8 +96,8 @@ function App() {
         <ProductFunc3 />
         <ProductFunc4 /> */}
 
-        {/* {productList} */}
-        {productList2}
+        {productList}
+        {/* {productList2} */}
       </div>
     </div>
   );

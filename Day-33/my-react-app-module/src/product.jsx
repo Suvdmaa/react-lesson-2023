@@ -5,12 +5,19 @@
 import React from 'react';
 
 class Product extends React.Component {
+
+   
     render() {
         return (
             <div class="flex">
                         <img className="image" src={this.props.productImageUrl} alt="img" />
                         <div class="text-container">
-                            <h2><i class="fa-sharp fa-solid fa-caret-up text-danger"></i> {this.props.number}</h2>
+                            <h2>
+                                
+                                <i class="fa-sharp fa-solid fa-caret-up text-danger"></i> 
+                              
+                                
+                                {this.props.number}</h2>
                             <p className="text-primary">{this.props.title}</p>
                             <p>{this.props.description}</p>
                             <div class="flex-div" >
