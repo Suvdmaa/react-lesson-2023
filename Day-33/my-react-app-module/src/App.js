@@ -15,11 +15,60 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import products from './Seed';
 import ProductFunc from './ProductFunc';
 import Product from "./product"
+import { useState } from "react";
 
+
+// create also changing function for productList variable in App component
+// initialize productList state with products seed in  App component
+// change product components 
 
 
 function App() {
-  const productList = products.map((product) =>{
+  // 1. create react state called "productList" variable in App component
+  const [productList, setProductList] = useState(products)
+
+
+  function HandleProductUpVote(productId){
+    // console.log("upvoted", productId)
+    // const foundProduct = products.filter(product =>{
+    //   if(product.id == productId){
+    //     return product
+    //   }
+    // })
+    // console.log(foundProduct[0].votes)
+    // foundProduct[0].votes = foundProduct[0].votes + 1
+    // console.log(foundProduct[0].votes)
+
+    // change votes in product array 
+
+    // products.map(product => {
+    //   if (product.id == productId){
+    //     return Object.assign({}, product,{
+    //       votes: product.votes + 1
+    //     })
+    //   }
+    //   else {
+    //     return product;
+    //   }
+    // })
+    // console.log("1",products)
+    const newProducts = productList.map(product =>{
+      if(product.id == productId){
+        return Object.assign({}, product,{
+          votes: product.votes + 1
+        })
+      } else {
+        return product
+      }
+    })
+    console.log(newProducts)
+
+    setProductList(newProducts)
+
+  }
+
+
+  const productList1 = products.map((product) =>{
     return <ProductFunc 
     title={product.title} 
     id={product.id} 
@@ -29,6 +78,7 @@ function App() {
     votes={product.votes} 
     submitterAvatarUrl={product.submitterAvatarUrl} 
     productImageUrl={product.productImageUrl}
+    onVote={HandleProductUpVote}
     stars={product.stars}/>
   })
   // const productList2 = products.map((product)=>{
@@ -96,7 +146,7 @@ function App() {
         <ProductFunc3 />
         <ProductFunc4 /> */}
 
-        {productList}
+        {productList1}
         {/* {productList2} */}
       </div>
     </div>

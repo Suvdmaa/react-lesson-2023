@@ -68,7 +68,7 @@ function ProductFunc(props) {
             <img className="image" src={props.productImageUrl} alt="img" />
             <div class="text-container">
 
-                <h2><a onClick={() => { handleUpVote(props) }}><i class="fa-sharp fa-solid fa-caret-up text-danger"></i></a>{votes}</h2>
+                <h2><a onClick={() => props.onVote(props.id)}><i class="fa-sharp fa-solid fa-caret-up text-danger"></i></a>{votes}</h2>
 
                 <h2><a onClick={() => {handleDownVote(props)}}>
                 <i class="fa-solid fa-caret-down"></i>
