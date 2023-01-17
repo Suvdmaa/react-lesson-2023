@@ -2,7 +2,7 @@
   text-align: center;
   width: 600px;
   margin : 10px auto;
-  background-color: #fcea66;
+  background-color: #e09af4;
 }
 
 .App-logo {
@@ -48,6 +48,6 @@ nav {
 }
 
 h1{
-  background-color: darkred;
+  background-color: #000000;
   color: white;
 }
