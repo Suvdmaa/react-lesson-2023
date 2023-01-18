@@ -13,7 +13,7 @@ import ProductFunc from './ProductFunc';
 //       <p>age: {age}</p>
 //       <p>email: {email}</p>
 //       <p>hobby: {hobby}</p>
-//     </div>
+//     </div>;
 //   )
 // }
 
