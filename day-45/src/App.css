@@ -1,8 +1,5 @@
 .App {
   text-align: center;
-  width: 600px;
-  margin : 10px auto;
-  background-color: #e09af4;
 }
 
 .App-logo {
@@ -40,14 +37,20 @@
   }
 }
 
-nav {
-  display: flex;
-  gap: 30px;
-  align-items: center;
-  justify-content: center;
-}
-
-h1{
-  background-color: #000000;
+body{
+  background-color: violet;
   color: white;
 }
+
+nav{
+  color:blueviolet;
+}
+nav a{
+  margin: 100px;
+}
+
+.active{
+  background-color: white;
+}
+
+
