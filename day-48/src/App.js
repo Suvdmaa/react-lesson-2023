@@ -11,6 +11,7 @@ import PascalTriangle from './components/Pascal';
 
 function App() {
   const [text, setText] = useState('')
+  const [isFancy, setIsFancy] = useState(false)
   function handleChange(e){
     setText(e.target.value)
   }
@@ -21,10 +22,11 @@ function App() {
       <Anime/>
       <Button/>
       <TopAnime/> */}
-      <Exercises/>
+      {/* <Exercises/>
       <FindEvenOdd />
       <Pascal/>
-      <PascalTriangle />
+      <PascalTriangle /> */}
+    
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Counter() {
+export default function Counter(props) {
   const [sum, setSum] = useState(0);
   const [style, setStyle] = useState(false);
 
