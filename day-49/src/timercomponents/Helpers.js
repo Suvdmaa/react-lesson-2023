@@ -1,7 +1,9 @@
+import {v4 as uuidv4} from "uuid"
+
 function renderElapsedString(elapsed, runningSince){
     let totalElapsed = elapsed;
     if(runningSince) {
-        totalElapsed += Date.now() - runningSince
+        totalElapsed += Date.now() - runningSince;
     }
 
     return millisecondsToHuman(totalElapsed)
@@ -24,4 +26,14 @@ function pad(numberString, size){
     return padded;
 }
 
-export {renderElapsedString}
+function newTimer(attrs = {}){
+    console.log(attrs)
+    return {
+        title: attrs.title || "Timer",
+        project: attrs.project || "Project",
+        id: uuidv4(), // exlint-disable-line no indef
+        elapsed: 0
+    }
+}
+
+export {renderElapsedString, newTimer}
