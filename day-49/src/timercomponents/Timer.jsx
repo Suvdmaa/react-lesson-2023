@@ -1,48 +1,48 @@
-import { Container, Card, Typography, Box } from "@mui/material";
+import Container from "@mui/material/Container";
+import Card from "@mui/material/Card";
+import { Box, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import TimerActionButton from "./TimerActionButton";
-import { useState } from "react";
 import { renderElapsedString } from "./Helpers";
-import { useEffect } from "react";
 
 export default function Timer({
+  id,
   title,
   project,
   elapsed,
   runningSince,
-  runningTime,
+  onTrashClick,
+  onStartClick,
+  onStopClick,
+  onEditClick,
 }) {
-  const [timerIsRunning, setTimerIsRunning] = useState(false);
   const timer = renderElapsedString(elapsed, runningSince);
-  const [runningInterval, setRunningInterval] = useState(null);
-  const [now, setNow] = useState(null);
 
-  //   setInterval(() => {setRunningInterval(runningInterval + 1)}, 1000);
-
-  function handleStart() {
-    setRunningInterval(Date.now());
-    setNow(Date.now());
-
-    let interval = null;
-
-    if (!timerIsRunning) {
-      interval = setInterval(() => {
-        setNow(Date.now());
-      }, 10);
-    } else {
-      clearInterval(interval);
-    }
+  function handleEditClick() {
+    onEditClick(id);
   }
 
-  let secondsPassed = 0;
-  if (runningInterval != null && now != null) {
-    secondsPassed = (now - runningInterval) / 1000;
+  function handleStop() {
+    onStopClick(id);
+  }
+
+  function handleStart() {
+    onStartClick(id);
+  }
+
+  function handleDelete() {
+    onTrashClick(id);
   }
 
   return (
     <Container maxWidth="sm">
-      <Card sx={{ maxWidth: 345, marginBottom: 5 }}>
+      <Card
+        sx={{
+          maxWidth: 345,
+          marginBottom: 5,
+        }}
+      >
         <Typography sx={{ fontSize: 28 }} color="text.secondary">
           {title}
         </Typography>
@@ -55,9 +55,7 @@ export default function Timer({
             justifyContent: "center",
             alignItems: "center",
           }}
-        >
-          <h1>{secondsPassed.toFixed(3)}</h1>
-        </Box>
+        ></Box>
         <Box
           sx={{
             display: "flex",
@@ -72,21 +70,16 @@ export default function Timer({
             display: "flex",
             justifyContent: "flex-end",
             alignItems: "center",
+            marginBottom: 2,
           }}
         >
-          <DeleteIcon />
-          <AutoFixHighIcon />
+          <DeleteIcon onClick={handleDelete} />
+          <ModeEditIcon onClick={handleEditClick} />
         </Box>
         <TimerActionButton
-          isTimerRunning={timerIsRunning}
-          onStartClick={() => {
-            setTimerIsRunning(true);
-            handleStart();
-          }}
-          onStopClick={() => {
-            setTimerIsRunning(false);
-            handleStart();
-          }}
+          isTimerRunning={runningSince}
+          onStartClick={handleStart}
+          onStopClick={handleStop}
         />
       </Card>
     </Container>
