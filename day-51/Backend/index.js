@@ -34,7 +34,23 @@ app.post("/data", (request, response) => {
         name: request.body.name,
         major: request.body.major,
     }
-    data.push(newData)
+    data = [...data, newData]
+    response.json(data)
+})
+
+app.put("/data", (request, response) => {
+    const found = data.filter(d => d.id !== request.body.id)
+
+    const newData = data.map(d => {
+        if(d.id === request.body.id){
+            d.name = request.body.name
+            d.major = request.body.major
+        }
+        return d
+    })
+    // data = [...found, request.body]
+
+    data = newData
     response.json(data)
 })
 
