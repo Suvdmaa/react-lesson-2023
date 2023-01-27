@@ -1,38 +1,44 @@
 import React from "react"
 import './App.css';
 import { AiFillCaretRight } from "react-icons/ai"
+import AboutFunc from "./components/AboutFunc";
+import { useEffect } from "react";
+import { useState } from "react";
 
 function App() {
   const url = "https://course-api.com/react-tabs-project";
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    urlData();
+  }, [data]);
+  
+  async function urlData() {
+    const FETCHED_DATA = await fetch(url);
+    const FETCHED_JSON = await FETCHED_DATA.json();
+    console.log(FETCHED_JSON);
+    setData(FETCHED_JSON);
+  }
+  
+
 
   return (
-    <section className="container">
-      <h1 className="title">Experience</h1>
-      <div className="job">
-        <div className="company-tab">
-          <h4>John</h4>
-          <h4>Smith</h4>
-          <h4>Tom</h4>
-        </div>
-        <div className="company-content">
-          <h2 className="job-title">Full Stack Web Developer</h2>
-          <p className="company-name">John</p>
-          <p className="date">December 2015 - Present</p>
-          <div className="text">
-            <AiFillCaretRight />
-            <p>Tote bag sartorial mlkshk air plant vinyl banjo lumbersexual poke leggings offal cold-pressed brunch neutra. Hammock photo booth live-edge disrupt.</p>
-          </div>
-          <div className="text">
-            <AiFillCaretRight />
-            <p>Post-ironic selvage chambray sartorial freegan meditation. Chambray chartreuse kombucha meditation, man bun four dollar toast street art cloud bread live-edge heirloom.</p>
-          </div>
-          <div className="text">
-            <AiFillCaretRight />
-            <p>Butcher drinking vinegar franzen authentic messenger bag copper mug food truck taxidermy. Mumblecore lomo echo park readymade iPhone migas single-origin coffee franzen cloud bread tilde vegan flexitarian.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div>
+      {data & data.filter((d) => {
+        <AboutFunc 
+        setData={setData} 
+        data={data}
+        id={d.id} 
+        order={d.order} 
+        title={d.title} 
+        dates={d.dates} 
+        duties={d.duties}
+        company={d.company}
+        />
+      })}
+
+      {/* <AboutFunc/> */}
+    </div>
   );
 }
 
