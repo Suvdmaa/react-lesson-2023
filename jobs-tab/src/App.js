@@ -11,33 +11,27 @@ function App() {
 
   useEffect(() => {
     urlData();
+    console.log(data)
   }, [data]);
   
   async function urlData() {
     const FETCHED_DATA = await fetch(url);
     const FETCHED_JSON = await FETCHED_DATA.json();
-    console.log(FETCHED_JSON);
     setData(FETCHED_JSON);
   }
-  
 
 
   return (
     <div>
-      {data & data.filter((d) => {
+      {data & data.map((d) => {
         <AboutFunc 
-        setData={setData} 
-        data={data}
-        id={d.id} 
-        order={d.order} 
-        title={d.title} 
-        dates={d.dates} 
-        duties={d.duties}
+        data={data} 
+        setData={setData}
+        id={d.id}
         company={d.company}
         />
-      })}
 
-      {/* <AboutFunc/> */}
+      })}
     </div>
   );
 }

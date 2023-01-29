@@ -1,0 +1,16 @@
+.App {
+  text-align: center;
+}
+
+* {
+  background-color: black;
+  color: white;
+}
+
+h1 {
+  text-shadow: black 0.1em 0.1em 0.2em;
+}
+
+h3 {
+  color: rgb(232, 47, 44);
+}

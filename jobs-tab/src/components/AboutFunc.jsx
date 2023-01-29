@@ -2,14 +2,8 @@ import { useState } from "react";
 import { AiFillCaretRight } from "react-icons/ai";
 import { useEffect } from "react";
 
-export default function AboutFunc({
-  id,
-  order,
-  title,
-  dates,
-  duties,
-  company,
-}) {
+export default function AboutFunc({ data, setData }) {
+  console.log(data);
   return (
     <section className="container">
       <h1 className="title">Experience</h1>

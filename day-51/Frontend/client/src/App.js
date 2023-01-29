@@ -73,7 +73,7 @@ function App() {
         isLoading ? '...Loading' : (data && data.map((d, index) => {
           return (
             <div key={index}>
-              <p >{d.name} --- {d.major}</p>
+              <p>{d.name} --- {d.major}</p>
               <button onClick={() => handleDelete(d.id)}>Delete</button>
               <button onClick={() => handleEdit(d)}>Edit</button>
             </div>
