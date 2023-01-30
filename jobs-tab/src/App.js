@@ -29,6 +29,9 @@ function App() {
         setData={setData}
         id={d.id}
         company={d.company}
+        title={d.title}
+        dates={d.dates}
+        duties={d.duties}
         />
 
       })}
