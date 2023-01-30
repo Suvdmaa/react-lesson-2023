@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     urlData();
     console.log(data)
-  }, [data]);
+  }, []);
   
   async function urlData() {
     const FETCHED_DATA = await fetch(url);
@@ -28,6 +28,7 @@ function App() {
         data={data} 
         setData={setData}
         id={d.id}
+        order={d.order}
         company={d.company}
         />
 
