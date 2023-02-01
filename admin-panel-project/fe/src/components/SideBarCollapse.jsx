@@ -22,13 +22,17 @@ const dataListUser = [
 ];
 
 export default function SideBarCollapse({ open, setOpen }) {
+  const [openUser, setOpenUser] = React.useState(false);
   return (
     <Box>
       <ListItemButton alignItems="flex-start" onClick={() => setOpen(!open)}>
         <ListItemIcon>
           <ShoppingCartIcon />
         </ListItemIcon>
-        <Link to="/ecommerce">
+        <Link
+          to="/ecommerce"
+          style={{ textDecoration: "none", color: "black" }}
+        >
           <ListItemText primary="E-commerce" />
         </Link>
         <KeyboardArrowDown />
@@ -40,16 +44,19 @@ export default function SideBarCollapse({ open, setOpen }) {
             <ListItemText primary={item.label} />
           </ListItemButton>
         ))}
-      <ListItemButton alignItems="flex-start" onClick={() => setOpen(!open)}>
+      <ListItemButton
+        alignItems="flex-start"
+        onClick={() => setOpenUser(!openUser)}
+      >
         <ListItemIcon>
           <PersonIcon />
         </ListItemIcon>
-        <Link to="/users">
+        <Link to="/users" style={{ textDecoration: "none", color: "black" }}>
           <ListItemText primary="User" />
         </Link>
         <KeyboardArrowDown />
       </ListItemButton>
-      {open &&
+      {openUser &&
         dataListUser.map((item) => (
           <ListItemButton key={item.label}>
             <ListItemIcon sx={{ color: "inherit" }}>{item.icon}</ListItemIcon>

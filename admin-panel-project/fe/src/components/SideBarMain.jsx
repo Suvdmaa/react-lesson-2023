@@ -14,7 +14,7 @@ const dataMain = [
   {
     icon: <AccountCircleIcon />,
     label: (
-      <Link style={{ textDecoration: "none" }} to="/profile">
+      <Link style={{ textDecoration: "none", color: "black" }} to="/profile">
         Profile
       </Link>
     ),
@@ -22,7 +22,7 @@ const dataMain = [
   {
     icon: <HomeIcon />,
     label: (
-      <Link style={{ textDecoration: "none" }} to="/dashboard">
+      <Link style={{ textDecoration: "none", color: "black" }} to="/dashboard">
         Dashboard
       </Link>
     ),
