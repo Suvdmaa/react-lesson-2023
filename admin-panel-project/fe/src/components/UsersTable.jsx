@@ -12,63 +12,32 @@ export default function UsersTable({ users, setUsers }) {
   }, []);
 
   async function fetchAllData() {
-    // fetch a data from localhost:8080/users
-    const FETCHED_DATA = await fetch(URL); // Response
-    const FETCHED_JSON = await FETCHED_DATA.json(); // {status: 'success', data: [{id: ...}]}
-    console.log(FETCHED_JSON);
+    const FETCHED_DATA = await fetch(URL);
+    const FETCHED_JSON = await FETCHED_DATA.json();
     setUsers(FETCHED_JSON.data);
   }
-  console.log(users);
 
   const columns = [
-    { field: "id", headerName: "ID", type: "number", width: 70 },
+    { field: "id", headerName: "ID", type: "number", width: 90 },
     {
-      field: "firstName",
+      field: "firstname",
       headerName: "First name",
       type: "string",
-      width: 150,
+      width: 180,
     },
-    { field: "lastName", headerName: "Last name", type: "string", width: 150 },
+    { field: "lastname", headerName: "Last name", type: "string", width: 180 },
     {
       field: "phonenumber",
       headerName: "Phone Number",
       type: "number",
-      width: 150,
+      width: 180,
     },
-    { field: "email", headerName: "Email", type: "string", width: 130 },
-    { field: "role", headerName: "Role", type: "string", width: 130 },
+    { field: "email", headerName: "Email", type: "string", width: 200 },
+    { field: "rowradio", headerName: "Role", type: "string", width: 100 },
     { field: "disabled", headerName: "Disabled", type: "boolean", width: 130 },
     { field: "avatar", headerName: "Avatar", type: "string", width: 130 },
-    { field: "actions", headerName: "Actions", type: "button", width: 130 },
+    { field: "actions", headerName: "Actions", type: "string", width: 130 },
   ];
-
-  // const rows = users.map((user) => {
-  //   return [
-  //     {
-  //       id: user.id,
-  //       firstname: user.firstname,
-  //       lastname: user.lastname,
-  //       phonenumber: user.phonenumber,
-  //       email: user.email,
-  //       role: user.rowradio,
-  //       disabled: user.disabled,
-  //     },
-  //   ];
-  // });
-
-  console.log(users);
-
-  // const rows = [
-  //   { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  //   { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  //   { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  //   { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  //   { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  //   { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  //   { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  //   { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  //   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  // ];
 
   return (
     <div style={{ height: 400, width: "100%" }}>
@@ -88,10 +57,6 @@ export default function UsersTable({ users, setUsers }) {
         rowsPerPageOptions={[5]}
         checkboxSelection
       />
-      {users &&
-        users.map((user) => {
-          return <div>{user.firstname}</div>;
-        })}
     </div>
   );
 }

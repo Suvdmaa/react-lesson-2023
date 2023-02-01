@@ -16,8 +16,22 @@ const dataListEcommerce = [
 ];
 
 const dataListUser = [
-  { icon: <ArrowRightIcon />, label: "User List" },
-  { icon: <ArrowRightIcon />, label: "User Add" },
+  {
+    icon: <ArrowRightIcon />,
+    label: (
+      <Link to="/users" style={{ textDecoration: "none", color: "black" }}>
+        User List
+      </Link>
+    ),
+  },
+  {
+    icon: <ArrowRightIcon />,
+    label: (
+      <Link to="/user/new" style={{ textDecoration: "none", color: "black" }}>
+        User Add
+      </Link>
+    ),
+  },
   { icon: <ArrowRightIcon />, label: "User Edit" },
 ];
 

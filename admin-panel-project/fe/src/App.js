@@ -9,24 +9,13 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
-import SideBar from "./components/Sidebar";
+import SideBar from "./components/Sidebar/Sidebar";
 import NewProduct from "./components/NewProduct";
-import { useState , useEffect} from "react";
+import { useState } from "react";
 
 function App() {
-    const [users, setUsers] = useState([]);
-
-    const URL = "http://localhost:8080/users";
-    // const newUser = {
-    //   id: "",
-    //   firstname: "",
-    //   lastname: "",
-    //   phonenumber: "",
-    //   email: "",
-    //   role: "",
-    //   disabled:"",
-    // }
-
+  const [users, setUsers] = useState([]);
+  const [products, setProducts] = useState([]);
 
   return (
     <div className="App">
@@ -45,10 +34,26 @@ function App() {
         <SideBar />
         <Box component="main" sx={{ flexGrow: 1, p: 10 }}>
           <Routes>
-            <Route path="/users" element={<Users users={users} setUsers={setUsers} />} />
-            <Route path="/ecommerce" element={<Ecommerce />} />
-            <Route path="/user/new" element={<NewUser users={users} setUsers={setUsers} />} />
-            <Route path="/ecommerce/new" element={<NewProduct/>}/>
+            <Route
+              path="/users"
+              element={<Users users={users} setUsers={setUsers} />}
+            />
+            <Route
+              path="/ecommerce"
+              element={
+                <Ecommerce products={products} setProducts={setProducts} />
+              }
+            />
+            <Route
+              path="/user/new"
+              element={<NewUser users={users} setUsers={setUsers} />}
+            />
+            <Route
+              path="/ecommerce/new"
+              element={
+                <NewProduct products={products} setProducts={setProducts} />
+              }
+            />
           </Routes>
         </Box>
       </Box>

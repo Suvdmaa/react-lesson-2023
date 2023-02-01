@@ -9,28 +9,13 @@ import FormLabel from "@mui/material/FormLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import { useState, useEffect } from "react";
+import { FormGroup } from "@mui/material";
 
 export default function NewUser({ users, setUsers }) {
   const URL = "http://localhost:8080/users";
-
-  // useEffect(() => {
-  //   fetchAllData();
-  // }, []);
-
-  // async function fetchAllData() {
-  //   // fetch a data from localhost:8080/users
-  //   const FETCHED_DATA = await fetch(URL); // Response
-  //   const FETCHED_JSON = await FETCHED_DATA.json(); // {status: 'success', data: [{id: ...}]}
-  //   console.log(FETCHED_JSON);
-  //   setUsers(FETCHED_JSON.data);
-  // }
-  // console.log(users);
-
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(e.target.rowradio.value);
-
+    console.log(e.target.disabled.value);
     const postData = {
       firstname: e.target.firstname.value,
       lastname: e.target.lastname.value,
@@ -39,6 +24,7 @@ export default function NewUser({ users, setUsers }) {
       rowradio: e.target.rowradio.value,
       disabled: e.target.disabled.value,
       password: e.target.password.value,
+      avatar: e.target.avatar.value,
     };
 
     const options = {
@@ -53,16 +39,13 @@ export default function NewUser({ users, setUsers }) {
     const FETCHED_JSON = await FETCHED_DATA.json();
     setUsers(FETCHED_JSON.data);
   }
+  console.log(users);
 
   return (
     <form onSubmit={handleSubmit}>
+      <h1>Add Users</h1>
       <Box
-        sx={{
-          "& .MuiTextField-root": { m: 1 },
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start",
-        }}
+        sx={{ "& .MuiTextField-root": { m: 1 } }}
         noValidate
         autoComplete="off"
       >
@@ -71,30 +54,30 @@ export default function NewUser({ users, setUsers }) {
           label="First Name"
           type="text"
           name="firstname"
-          fullWidth={true}
+          fullWidth
         />
         <TextField
           id="outlined-lastname"
           label="Last Name"
           type="text"
           name="lastname"
-          fullWidth={true}
+          fullWidth
         />
         <TextField
           id="outlined-number"
           label="Phone Number"
           type="number"
           name="phonenumber"
-          fullWidth={true}
+          fullWidth
         />
         <TextField
           id="outlined-email"
           label="Email"
           type="email"
           name="email"
-          fullWidth={true}
+          fullWidth
         />
-        <FormControl sx={{ mx: 2 }}>
+        <FormControl sx={{ m: 2, display: "block" }}>
           <FormLabel
             id="demo-row-radio-buttons-group-label"
             sx={{ display: "flex" }}
@@ -119,15 +102,25 @@ export default function NewUser({ users, setUsers }) {
               type="radio"
             />
           </RadioGroup>
-          <FormControlLabel
-            value="disabled"
-            control={<Checkbox />}
-            label="Disabled"
-            labelPlacement="top"
-            name="disabled"
-            type="checkbox"
-          />
         </FormControl>
+        <Box sx={{ m: 2 }}>
+          <FormLabel id="demo-radio-buttons-group-label">Disabled</FormLabel>
+          <br />
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox />}
+              sx={{ width: "10px" }}
+              name="disabled"
+            />
+          </FormGroup>
+        </Box>
+        <Box sx={{ mx: 1, my: 2 }}>
+          <h4>Avatar</h4>
+          <Button variant="contained" component="label">
+            Upload an image
+            <input hidden accept="image/*" multiple type="file" name="avatar" />
+          </Button>
+        </Box>
         <TextField
           id="outlined-password-input"
           label="Password"
@@ -136,17 +129,13 @@ export default function NewUser({ users, setUsers }) {
           autoComplete="current-password"
           fullWidth={true}
         />
-        <Stack spacing={2} direction="row">
+        <Stack spacing={2} direction="row" sx={{ my: 2, mx: 1 }}>
           <Button variant="contained" type="submit">
             Save
           </Button>
           <Button variant="outlined">Reset</Button>
           <Button variant="outlined">Cancel</Button>
         </Stack>
-        {users &&
-          users.map((user) => {
-            return <div>{user.firstname}</div>;
-          })}
       </Box>
     </form>
   );

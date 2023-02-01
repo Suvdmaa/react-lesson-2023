@@ -2,32 +2,33 @@ import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/system";
 import { Button } from "@mui/material";
-import { styled, alpha } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import { green, purple } from "@mui/material/colors";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
-export default function EcommerceTable() {
+export default function EcommerceTable({ products, setProducts }) {
+  const URL = "http://localhost:8080/ecommerce";
+
+  useEffect(() => {
+    fetchAllData();
+  }, []);
+
+  async function fetchAllData() {
+    const FETCHED_DATA = await fetch(URL);
+    const FETCHED_JSON = await FETCHED_DATA.json();
+    setProducts(FETCHED_JSON.data);
+  }
   const columns = [
-    { field: "id", headerName: "ID", width: 70, type: "string" },
-    { field: "img", headerName: "Image", width: 150, type: "string" },
-    { field: "subtitle", headerName: "Subtitle", width: 130, type: "string" },
-    { field: "price", headerName: "Price", width: 100, type: "number" },
-    { field: "rating", headerName: "Rating", type: "number", width: 100 },
+    { field: "id", headerName: "ID", width: 90, type: "string" },
+    { field: "image", headerName: "Image", width: 180, type: "string" },
+    { field: "title", headerName: "Title", width: 180, type: "string" },
+    { field: "subtitle", headerName: "Subtitle", width: 180, type: "string" },
+    { field: "price", headerName: "Price", width: 130, type: "number" },
+    { field: "rating", headerName: "Rating", type: "number", width: 130 },
     { field: "actions", headerName: "Actions", width: 150, type: "button" },
-  ];
-
-  const rows = [
-    { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-    { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-    { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-    { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-    { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-    { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-    { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-    { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-    { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
   ];
 
   const ColorButton = styled(Button)(({ theme }) => ({
@@ -99,7 +100,7 @@ export default function EcommerceTable() {
         </Box>
       </Box>
       <DataGrid
-        rows={rows}
+        rows={products}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
