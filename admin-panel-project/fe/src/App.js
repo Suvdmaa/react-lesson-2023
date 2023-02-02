@@ -12,6 +12,7 @@ import AppBar from "@mui/material/AppBar";
 import SideBar from "./components/Sidebar/Sidebar";
 import NewProduct from "./components/NewProduct";
 import { useState } from "react";
+import ProductsEdit from "./components/ProductsEdit";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -54,6 +55,7 @@ function App() {
                 <NewProduct products={products} setProducts={setProducts} />
               }
             />
+            <Route path="/ecommerce/edit/:id" element={<ProductsEdit />}/>
           </Routes>
         </Box>
       </Box>

@@ -77,7 +77,7 @@ app.post("/users", (request, response) => {
 });
 
 app.get("/ecommerce", (request, response) => {
-  fs.readFile("./public/data/users.json", "utf-8", (readError, readData) => {
+  fs.readFile("./public/data/products.json", "utf-8", (readError, readData) => {
     if (readError) {
       response.json({
         status: "file reader error",
@@ -144,6 +144,42 @@ app.post("/ecommerce", (request, response) => {
     );
   });
 });
+
+app.put('/ecommerce', (request, response) => {
+  console.log(request.body)
+
+  fs.readFile('./data/products.json', 'utf-8', (readError, readData) => {
+      if(readError){
+          response.json({
+              status: 'file read error',
+              data: []
+          })
+      }
+      const savedData = JSON.parse(readData);
+      const changedData = savedData.map(d => {
+          if(d.id === request.body.id){
+              d.username = request.body.username,
+              d.age = request.body.age
+              
+          }
+          return d
+      })
+
+      fs.writeFile('./data/products.json', JSON.stringify(changedData), (writeError)=> {
+          if(writeError){
+              response.json({
+                  status: 'file write erro',
+                  data: []
+              })
+          }
+          response.json({
+              status: 'success',
+              data: changedData
+          })
+
+      })
+  })
+})
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

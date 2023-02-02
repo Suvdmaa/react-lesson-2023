@@ -3,6 +3,10 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Button, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { Stack } from "@mui/system";
+import { Avatar } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { green, pink, purple } from "@mui/material/colors";
 
 export default function UsersTable({ users, setUsers }) {
   const URL = "http://localhost:8080/users";
@@ -16,7 +20,21 @@ export default function UsersTable({ users, setUsers }) {
     const FETCHED_JSON = await FETCHED_DATA.json();
     setUsers(FETCHED_JSON.data);
   }
+  const ColorButton = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(purple[500]),
+    backgroundColor: green["A400"],
+    "&:hover": {
+      backgroundColor: green["A700"],
+    },
+  }));
 
+  const ColorButtonDelete = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(purple[500]),
+    backgroundColor: pink["A200"],
+    "&:hover": {
+      backgroundColor: pink["A400"],
+    },
+  }));
   const columns = [
     { field: "id", headerName: "ID", type: "number", width: 90 },
     {
@@ -35,8 +53,39 @@ export default function UsersTable({ users, setUsers }) {
     { field: "email", headerName: "Email", type: "string", width: 200 },
     { field: "rowradio", headerName: "Role", type: "string", width: 100 },
     { field: "disabled", headerName: "Disabled", type: "boolean", width: 130 },
-    { field: "avatar", headerName: "Avatar", type: "string", width: 130 },
-    { field: "actions", headerName: "Actions", type: "string", width: 130 },
+    {
+      field: "avatar",
+      headerName: "Avatar",
+      width: 100,
+      renderCell: (params) => {
+        // console.log(params);
+        return (
+          <Box>
+            <Avatar src={params.value} />
+            {params.value}
+          </Box>
+        );
+      },
+    },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 200,
+      renderCell: () => {
+        return (
+          <Box>
+            <Stack direction="row" spacing={3}>
+              <ColorButton variant="contained" color="success">
+                Edit
+              </ColorButton>
+              <ColorButtonDelete variant="contained" color="error">
+                Delete
+              </ColorButtonDelete>
+            </Stack>
+          </Box>
+        );
+      },
+    },
   ];
 
   return (
