@@ -20,6 +20,22 @@ export default function UsersTable({ users, setUsers }) {
     const FETCHED_JSON = await FETCHED_DATA.json();
     setUsers(FETCHED_JSON.data);
   }
+
+  async function handleDelete(userId) {
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: userId,
+      }),
+    };
+    const FETCHED_DATA = await fetch(URL, options);
+    const FETCHED_JSON = await FETCHED_DATA.json();
+    setUsers(FETCHED_JSON.data);
+  }
+
   const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(purple[500]),
     backgroundColor: green["A400"],
@@ -71,14 +87,26 @@ export default function UsersTable({ users, setUsers }) {
       field: "actions",
       headerName: "Actions",
       width: 200,
-      renderCell: () => {
+      renderCell: (params) => {
         return (
           <Box>
             <Stack direction="row" spacing={3}>
-              <ColorButton variant="contained" color="success">
-                Edit
-              </ColorButton>
-              <ColorButtonDelete variant="contained" color="error">
+              <Link
+                to={`/user/edit/${params.row.id}`}
+                state={{
+                  user: users.filter((p) => p.id === params.row.id),
+                }}
+                style={{ textDecoration: "none" }}
+              >
+                <ColorButton variant="contained" color="success">
+                  Edit
+                </ColorButton>
+              </Link>
+              <ColorButtonDelete
+                variant="contained"
+                color="error"
+                onClick={() => handleDelete(params.row.id)}
+              >
                 Delete
               </ColorButtonDelete>
             </Stack>

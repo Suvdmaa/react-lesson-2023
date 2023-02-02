@@ -9,25 +9,9 @@ import InputBase from "@mui/material/InputBase";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { Stack } from "@mui/material";
-import { useState } from "react";
 
 export default function EcommerceTable({ products, setProducts }) {
   const URL = "http://localhost:8080/ecommerce";
-  const newProducts = {
-    id: "",
-    image: "",
-    title: "",
-    subtitle: "",
-    price: "",
-    discount: "",
-    description1: "",
-    description2: "",
-    code: "",
-    hashtag: "",
-    technology: "",
-    rating: "",
-  };
-  const [currentProducts, setCurrentProducts] = useState(newProducts);
 
   useEffect(() => {
     fetchAllData();
@@ -35,6 +19,20 @@ export default function EcommerceTable({ products, setProducts }) {
 
   async function fetchAllData() {
     const FETCHED_DATA = await fetch(URL);
+    const FETCHED_JSON = await FETCHED_DATA.json();
+    setProducts(FETCHED_JSON.data);
+  }
+  async function handleDelete(productId) {
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        productId: productId,
+      }),
+    };
+    const FETCHED_DATA = await fetch(URL, options);
     const FETCHED_JSON = await FETCHED_DATA.json();
     setProducts(FETCHED_JSON.data);
   }
@@ -105,29 +103,28 @@ export default function EcommerceTable({ products, setProducts }) {
       field: "actions",
       headerName: "Actions",
       width: 200,
-      renderCell: () => {
+      renderCell: (params) => {
         return (
           <Box>
             <Stack direction="row" spacing={3}>
-              {products &&
-                products.map((e) => {
-                  return (
-                    <Box>
-                      <Link to={`/ecommerce/edit/:${e.id}`}>
-                        <ColorButton
-                          variant="contained"
-                          color="success"
-                          // onClick={() => handleEdit(e.id)}
-                        >
-                          Edit
-                        </ColorButton>
-                      </Link>
-                      <ColorButtonDelete variant="contained" color="error">
-                        Delete
-                      </ColorButtonDelete>
-                    </Box>
-                  );
-                })}
+              <Link
+                to={`/ecommerce/edit/${params.row.id}`}
+                state={{
+                  product: products.filter((p) => p.id === params.row.id),
+                }}
+                style={{ textDecoration: "none" }}
+              >
+                <ColorButton variant="contained" color="success">
+                  Edit
+                </ColorButton>
+              </Link>
+              <ColorButtonDelete
+                variant="contained"
+                color="error"
+                onClick={() => handleDelete(params.row.id)}
+              >
+                Delete
+              </ColorButtonDelete>
             </Stack>
           </Box>
         );

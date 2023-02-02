@@ -76,6 +76,85 @@ app.post("/users", (request, response) => {
   });
 });
 
+app.put("/users", (request, response) => {
+  const body = request.body;
+
+  fs.readFile("./public/data/users.json", "utf-8", (readError, readData) => {
+    if (readError) {
+      response.json({
+        status: "file read error",
+        data: [],
+      });
+    }
+    const savedData = JSON.parse(readData);
+    const changedData = savedData.map((d) => {
+      if (d.id === body.id) {
+        (d.firstname = body.firstname),
+          (d.lastname = body.lastname),
+          (d.phonenumber = body.phonenumber),
+          (d.email = body.email),
+          (d.rowradio = body.rowradio),
+          (d.disabled = body.disabled),
+          (d.password = body.password),
+          (d.avatar = body.avatar);
+      }
+      return d;
+    });
+
+    fs.writeFile(
+      "./public/data/users.json",
+      JSON.stringify(changedData),
+      (writeError) => {
+        if (writeError) {
+          response.json({
+            status: "file write error",
+            data: [],
+          });
+        }
+        response.json({
+          status: "success",
+          data: changedData,
+        });
+      }
+    );
+  });
+});
+
+app.delete("/users", (request, response) => {
+  const body = request.body;
+
+  fs.readFile("./public/data/users.json", "utf-8", (readError, readData) => {
+    if (readError) {
+      response.json({
+        status: "file reader error",
+        data: [],
+      });
+    }
+    const readObject = JSON.parse(readData);
+
+    const filteredObjects = readObject.filter((o) => o.id !== body.userId);
+
+    fs.writeFile(
+      "./public/data/users.json",
+      JSON.stringify(filteredObjects),
+      (writeError) => {
+        if (writeError) {
+          response.json({
+            status: "write file error",
+            data: [],
+          });
+        }
+        response.json({
+          status: "success",
+          data: filteredObjects,
+        });
+      }
+    );
+  });
+});
+
+/////////////////////////////////////////////////////////////////////////////////
+
 app.get("/ecommerce", (request, response) => {
   fs.readFile("./public/data/products.json", "utf-8", (readError, readData) => {
     if (readError) {
@@ -145,41 +224,85 @@ app.post("/ecommerce", (request, response) => {
   });
 });
 
-app.put('/ecommerce', (request, response) => {
-  console.log(request.body)
+app.put("/ecommerce", (request, response) => {
+  const body = request.body;
 
-  fs.readFile('./data/products.json', 'utf-8', (readError, readData) => {
-      if(readError){
-          response.json({
-              status: 'file read error',
-              data: []
-          })
+  fs.readFile("./public/data/products.json", "utf-8", (readError, readData) => {
+    if (readError) {
+      response.json({
+        status: "file read error",
+        data: [],
+      });
+    }
+    const savedData = JSON.parse(readData);
+    const changedData = savedData.map((d) => {
+      if (d.id === body.id) {
+        (d.image = body.image),
+          (d.title = body.title),
+          (d.subtitle = body.subtitle),
+          (d.price = body.price),
+          (d.discount = body.discount),
+          (d.description1 = body.description1),
+          (d.description2 = body.description2),
+          (d.code = body.code),
+          (d.hashtag = body.hashtag),
+          (d.technology = body.technology),
+          (d.rating = body.rating);
       }
-      const savedData = JSON.parse(readData);
-      const changedData = savedData.map(d => {
-          if(d.id === request.body.id){
-              d.username = request.body.username,
-              d.age = request.body.age
-              
-          }
-          return d
-      })
+      return d;
+    });
 
-      fs.writeFile('./data/products.json', JSON.stringify(changedData), (writeError)=> {
-          if(writeError){
-              response.json({
-                  status: 'file write erro',
-                  data: []
-              })
-          }
+    fs.writeFile(
+      "./public/data/products.json",
+      JSON.stringify(changedData),
+      (writeError) => {
+        if (writeError) {
           response.json({
-              status: 'success',
-              data: changedData
-          })
+            status: "file write erro",
+            data: [],
+          });
+        }
+        response.json({
+          status: "success",
+          data: changedData,
+        });
+      }
+    );
+  });
+});
 
-      })
-  })
-})
+app.delete("/ecommerce", (request, response) => {
+  const body = request.body;
+
+  fs.readFile("./public/data/products.json", "utf-8", (readError, readData) => {
+    if (readError) {
+      response.json({
+        status: "file reader error",
+        data: [],
+      });
+    }
+    const readObject = JSON.parse(readData);
+
+    const filteredObjects = readObject.filter((o) => o.id !== body.productId);
+
+    fs.writeFile(
+      "./public/data/products.json",
+      JSON.stringify(filteredObjects),
+      (writeError) => {
+        if (writeError) {
+          response.json({
+            status: "write file error",
+            data: [],
+          });
+        }
+        response.json({
+          status: "success",
+          data: filteredObjects,
+        });
+      }
+    );
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
