@@ -10,7 +10,7 @@ app.use(express.json())    //  enig zaavalchgui hiih estoi hiihgui bol dandaa un
 
 app.get('/users', (request, response) => {
 
-    fs.readFile('./public/data/users.json', 'utf-8', (readError, readData) =>{
+    fs.readFile('./data/users.json', 'utf-8', (readError, readData) =>{
         if(readError){
             response.json({
                 status: 'file reader error',

@@ -3,14 +3,31 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/system";
 import { Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { green, purple } from "@mui/material/colors";
+import { green, pink, purple } from "@mui/material/colors";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { Stack } from "@mui/material";
+import { useState } from "react";
 
 export default function EcommerceTable({ products, setProducts }) {
   const URL = "http://localhost:8080/ecommerce";
+  const newProducts = {
+    id: "",
+    image: "",
+    title: "",
+    subtitle: "",
+    price: "",
+    discount: "",
+    description1: "",
+    description2: "",
+    code: "",
+    hashtag: "",
+    technology: "",
+    rating: "",
+  };
+  const [currentProducts, setCurrentProducts] = useState(newProducts);
 
   useEffect(() => {
     fetchAllData();
@@ -21,21 +38,20 @@ export default function EcommerceTable({ products, setProducts }) {
     const FETCHED_JSON = await FETCHED_DATA.json();
     setProducts(FETCHED_JSON.data);
   }
-  const columns = [
-    { field: "id", headerName: "ID", width: 90, type: "string" },
-    { field: "image", headerName: "Image", width: 180, type: "string" },
-    { field: "title", headerName: "Title", width: 180, type: "string" },
-    { field: "subtitle", headerName: "Subtitle", width: 180, type: "string" },
-    { field: "price", headerName: "Price", width: 130, type: "number" },
-    { field: "rating", headerName: "Rating", type: "number", width: 130 },
-    { field: "actions", headerName: "Actions", width: 150, type: "button" },
-  ];
 
   const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(purple[500]),
     backgroundColor: green["A400"],
     "&:hover": {
       backgroundColor: green["A700"],
+    },
+  }));
+
+  const ColorButtonDelete = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(purple[500]),
+    backgroundColor: pink["A200"],
+    "&:hover": {
+      backgroundColor: pink["A400"],
     },
   }));
 
@@ -77,6 +93,47 @@ export default function EcommerceTable({ products, setProducts }) {
       },
     },
   }));
+
+  const columns = [
+    { field: "id", headerName: "ID", width: 90, type: "string" },
+    { field: "image", headerName: "Image", width: 180, type: "string" },
+    { field: "title", headerName: "Title", width: 180, type: "string" },
+    { field: "subtitle", headerName: "Subtitle", width: 180, type: "string" },
+    { field: "price", headerName: "Price", width: 130, type: "number" },
+    { field: "rating", headerName: "Rating", type: "number", width: 130 },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 200,
+      renderCell: () => {
+        return (
+          <Box>
+            <Stack direction="row" spacing={3}>
+              {products &&
+                products.map((e) => {
+                  return (
+                    <Box>
+                      <Link to={`/ecommerce/edit/:${e.id}`}>
+                        <ColorButton
+                          variant="contained"
+                          color="success"
+                          // onClick={() => handleEdit(e.id)}
+                        >
+                          Edit
+                        </ColorButton>
+                      </Link>
+                      <ColorButtonDelete variant="contained" color="error">
+                        Delete
+                      </ColorButtonDelete>
+                    </Box>
+                  );
+                })}
+            </Stack>
+          </Box>
+        );
+      },
+    },
+  ];
 
   return (
     <div style={{ height: 400, width: "100%" }}>
