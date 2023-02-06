@@ -19,7 +19,7 @@ const dataListUser = [
   {
     icon: <ArrowRightIcon />,
     label: (
-      <Link to="/users" style={{ textDecoration: "none", color: "black" }}>
+      <Link to="/users" style={{ textDecoration: "none", color: "orange" }}>
         User List
       </Link>
     ),
@@ -27,7 +27,7 @@ const dataListUser = [
   {
     icon: <ArrowRightIcon />,
     label: (
-      <Link to="/user/new" style={{ textDecoration: "none", color: "black" }}>
+      <Link to="/user/new" style={{ textDecoration: "none", color: "orange" }}>
         User Add
       </Link>
     ),
@@ -45,7 +45,7 @@ export default function SideBarCollapse({ open, setOpen }) {
         </ListItemIcon>
         <Link
           to="/ecommerce"
-          style={{ textDecoration: "none", color: "black" }}
+          style={{ textDecoration: "none", color: "#1493ff " }}
         >
           <ListItemText primary="E-commerce" />
         </Link>
@@ -65,7 +65,7 @@ export default function SideBarCollapse({ open, setOpen }) {
         <ListItemIcon>
           <PersonIcon />
         </ListItemIcon>
-        <Link to="/users" style={{ textDecoration: "none", color: "black" }}>
+        <Link to="/users" style={{ textDecoration: "none", color: "#1493ff" }}>
           <ListItemText primary="User" />
         </Link>
         <KeyboardArrowDown />

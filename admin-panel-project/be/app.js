@@ -80,7 +80,6 @@ app.put("/users", (request, response) => {
   const body = request.body;
 
   fs.readFile("./public/data/users.json", "utf-8", (readError, readData) => {
-
     if (readError) {
       response.json({
         status: "file read error",

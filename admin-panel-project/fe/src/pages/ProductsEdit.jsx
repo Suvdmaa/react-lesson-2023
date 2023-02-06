@@ -81,7 +81,7 @@ export default function ProductsEdit({ products, setProducts }) {
               Image
             </Typography>
             <TextField
-              type="text"
+              // type="text"
               name="image"
               defaultValue={currentProduct.image}
               onChange={handleImage}

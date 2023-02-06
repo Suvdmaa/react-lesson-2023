@@ -13,7 +13,7 @@ import {
 
 import { FormGroup } from "@mui/material";
 
-export default function UserEdit([users, setUsers]) {
+export default function UserEdit({ setUsers }) {
   let data = useLocation();
   //   console.log("data", data.state.product);
   const URL = "http://localhost:8080/users";
@@ -72,7 +72,7 @@ export default function UserEdit([users, setUsers]) {
 
   return (
     <Box sx={{ mx: "50px", my: "50px", p: "50px", border: 1, borderRadius: 2 }}>
-      <Typography variant="h4">Edit Products</Typography>
+      <Typography variant="h4">Edit Users</Typography>
       <br />
       {currentUser && (
         <Box>
@@ -195,9 +195,11 @@ export default function UserEdit([users, setUsers]) {
             />
           </Box>
           <br />
-          <Button variant="outlined" onClick={handleEdit}>
-            Save
-          </Button>
+          <Link to={"/users"} style={{ textDecoration: "none" }}>
+            <Button variant="outlined" onClick={handleEdit}>
+              Save
+            </Button>
+          </Link>
           <Link to={"/users"} style={{ textDecoration: "none" }}>
             <Button variant="outlined">Back</Button>
           </Link>

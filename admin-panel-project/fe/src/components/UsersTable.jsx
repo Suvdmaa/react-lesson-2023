@@ -7,6 +7,7 @@ import { Stack } from "@mui/system";
 import { Avatar } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { green, pink, purple } from "@mui/material/colors";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function UsersTable({ users, setUsers }) {
   const URL = "http://localhost:8080/users";
@@ -22,6 +23,7 @@ export default function UsersTable({ users, setUsers }) {
   }
 
   async function handleDelete(userId) {
+    toast(`You deleted User`);
     const options = {
       method: "DELETE",
       headers: {
@@ -74,7 +76,6 @@ export default function UsersTable({ users, setUsers }) {
       headerName: "Avatar",
       width: 100,
       renderCell: (params) => {
-        // console.log(params);
         return (
           <Box>
             <Avatar src={params.value} />
@@ -109,6 +110,7 @@ export default function UsersTable({ users, setUsers }) {
               >
                 Delete
               </ColorButtonDelete>
+              <ToastContainer />
             </Stack>
           </Box>
         );

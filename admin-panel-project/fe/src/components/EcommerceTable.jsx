@@ -99,12 +99,18 @@ export default function EcommerceTable({ products, setProducts }) {
       headerName: "Image",
       width: 180,
       rederCell: (params) => {
-        return <img src={params.row.image} style={{ width: "100px" }} />;
+        return <img src={params.row.image} style={{ width: "180px" }} />;
       },
     },
     { field: "title", headerName: "Title", width: 180, type: "string" },
     { field: "subtitle", headerName: "Subtitle", width: 180, type: "string" },
     { field: "price", headerName: "Price", width: 130, type: "number" },
+    {
+      field: "description1",
+      headerName: "Description",
+      width: 130,
+      type: "string",
+    },
     { field: "rating", headerName: "Rating", type: "number", width: 130 },
     {
       field: "actions",
@@ -141,10 +147,13 @@ export default function EcommerceTable({ products, setProducts }) {
 
   return (
     <div style={{ height: 400, width: "100%" }}>
-      <Box sx={{ display: "flex", justifyContent: "space-between", my: 2 }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between", my: 4 }}>
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           Products 11 total
-          <Link to="/ecommerce/new" style={{ textDecoration: "none" }}>
+          <Link
+            to="/ecommerce/new"
+            style={{ textDecoration: "none", paddingTop: 10 }}
+          >
             <ColorButton variant="contained">Create Product</ColorButton>
           </Link>
         </Box>
