@@ -94,7 +94,14 @@ export default function EcommerceTable({ products, setProducts }) {
 
   const columns = [
     { field: "id", headerName: "ID", width: 90, type: "string" },
-    { field: "image", headerName: "Image", width: 180, type: "string" },
+    {
+      field: "image",
+      headerName: "Image",
+      width: 180,
+      rederCell: (params) => {
+        return <img src={params.row.image} style={{ width: "100px" }} />;
+      },
+    },
     { field: "title", headerName: "Title", width: 180, type: "string" },
     { field: "subtitle", headerName: "Subtitle", width: 180, type: "string" },
     { field: "price", headerName: "Price", width: 130, type: "number" },
