@@ -56,13 +56,9 @@ export default function NewProduct({ setProducts }) {
         <h3 style={{ width: 300 }}>Image</h3>
         <TextField
           id="outlined-image"
-          type="text"
-          // select
           sx={{ width: 300 }}
           name="image"
-        >
-          {/* <MenuItem>12</MenuItem> */}
-        </TextField>
+        ></TextField>
       </Box>
       <br />
       <Box sx={{ display: "flex" }}>
