@@ -1,0 +1,10 @@
+[
+  {
+    "firstname": "qwer",
+    "lastname": "qwer",
+    "email": "qwer@gmail.com",
+    "password": "qwer",
+    "address": "qwe",
+    "role": { "id": 2, "name": "User" }
+  }
+]
