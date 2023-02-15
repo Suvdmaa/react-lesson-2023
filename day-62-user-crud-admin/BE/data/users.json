@@ -1,10 +1,1 @@
-[
-  {
-    "firstname": "qwer",
-    "lastname": "qwer",
-    "email": "qwer@gmail.com",
-    "password": "qwer",
-    "address": "qwe",
-    "role": { "id": 2, "name": "User" }
-  }
-]
+[{"firstname":"Suvdmaa","lastname":"E","email":"black.enkhbold.suvdmaa@gmail.com","password":"$2b$10$QF1XZpRv77LXBtJJmUnUhePXV.Hmo43XYebuzrtP9mapkHml/zIca","address":"sds","role":{"id":2,"name":"User"}},{"firstname":"Suvdmaa","lastname":"E","email":"suvdmaa@gmail.com","password":"$2b$10$szWHLZ4pURnuSjkf4qhlfuLtQF1KXtt54OO0B049NHqxUt.ZvHS2e","address":"qwer","role":{"id":2,"name":"User"}}]
