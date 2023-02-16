@@ -304,6 +304,24 @@ app.delete("/ecommerce", (request, response) => {
   });
 });
 
+app.get("/search", (request, response) => {
+  console.log(request.query);
+  const savedProducts = fs.readFileSync("./public/data/products.json", {
+    encoding: "utf-8",
+    flag: "r",
+  });
+
+  const savedProductsArrayObject = JSON.parse(savedProducts);
+
+  const foundProducts = savedProductsArrayObject.filter((product) =>
+    product.title.includes(request.query.value)
+  );
+  response.json({
+    status: "success",
+    data: foundProducts,
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

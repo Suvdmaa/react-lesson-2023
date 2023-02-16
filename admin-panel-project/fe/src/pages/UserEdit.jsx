@@ -1,5 +1,5 @@
 import { useLocation, Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   Box,
   TextField,
@@ -10,13 +10,13 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-
+import { UserContext } from "../contexts/UserContext";
 import { FormGroup } from "@mui/material";
 
-export default function UserEdit({ setUsers }) {
+export default function UserEdit() {
+  const { users, setUsers, URL } = useContext(UserContext);
   let data = useLocation();
   //   console.log("data", data.state.product);
-  const URL = "http://localhost:8080/users";
   const [currentUser, setCurrentUser] = useState(data.state.user[0]);
   //   const [user, setProduct] = useState([]);
 

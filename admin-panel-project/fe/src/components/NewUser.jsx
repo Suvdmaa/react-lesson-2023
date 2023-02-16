@@ -11,12 +11,17 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { FormGroup } from "@mui/material";
 import { toast, ToastContainer } from "react-toastify";
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
-export default function NewUser({ users, setUsers }) {
-  const URL = "http://localhost:8080/users";
+export default function NewUser() {
+  const { users, setUsers, URL } = useContext(UserContext);
+  const navigate = useNavigate();
   toast("You added New User");
   async function handleSubmit(e) {
     e.preventDefault();
+    navigate("/users");
     console.log(e.target.disabled.value);
     const postData = {
       firstname: e.target.firstname.value,
@@ -121,13 +126,7 @@ export default function NewUser({ users, setUsers }) {
             <h4>Avatar</h4>
             <Button variant="contained" component="label">
               Upload an image
-              <input
-                hidden
-                accept="image/*"
-                multiple
-                type="file"
-                name="avatar"
-              />
+              <input hidden multiple type="file" name="avatar" />
             </Button>
           </Box>
           <TextField

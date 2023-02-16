@@ -3,9 +3,14 @@ import { Button, Typography, Link } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { green, purple, indigo } from "@mui/material/colors";
 import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { ProductsContext } from "../contexts/ProductsContext";
+import { useContext } from "react";
+import { addProducts } from "../services/axiosProductsSerces";
 
-export default function NewProduct({ setProducts }) {
-  const URL = "http://localhost:8080/ecommerce";
+export default function NewProduct() {
+  const { products, setProducts, URL } = useContext(ProductsContext);
+  const navigate = useNavigate();
 
   const ColorButtonSave = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(purple[500]),
@@ -23,33 +28,9 @@ export default function NewProduct({ setProducts }) {
   }));
 
   async function handleSubmit(e) {
-    e.preventDefault();
     toast(`You saved product`);
-    const postData = {
-      image: e.target.image.value,
-      title: e.target.title.value,
-      subtitle: e.target.subtitle.value,
-      price: e.target.price.value,
-      discount: e.target.discount.value,
-      description1: e.target.description1.value,
-      description2: e.target.description2.value,
-      code: e.target.code.value,
-      hashtag: e.target.hashtag.value,
-      technology: e.target.technology.value,
-      rating: e.target.rating.value,
-    };
-
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(postData),
-    };
-
-    const FETCHED_DATA = await fetch(URL, options);
-    const FETCHED_JSON = await FETCHED_DATA.json();
-    setProducts(FETCHED_JSON.data);
+    navigate("/ecommerce");
+    addProducts(e, setProducts, URL);
   }
   return (
     <Box sx={{ mx: "50px", my: "50px", p: "50px", border: 1, borderRadius: 2 }}>
@@ -58,7 +39,7 @@ export default function NewProduct({ setProducts }) {
         <Box sx={{ display: "flex" }}>
           <h3 style={{ width: 300 }}>Image</h3>
           <TextField
-            name={"image"}
+            name="image"
             variant={"filled"}
             fullWidth={true}
             sx={{ width: 600 }}

@@ -2,16 +2,16 @@ import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button, Box } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { Stack } from "@mui/system";
 import { Avatar } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { green, pink, purple } from "@mui/material/colors";
 import { toast, ToastContainer } from "react-toastify";
+import { UserContext } from "../contexts/UserContext";
 
-export default function UsersTable({ users, setUsers }) {
-  const URL = "http://localhost:8080/users";
-
+export default function UsersTable() {
+  const { users, setUsers, URL } = useContext(UserContext);
   useEffect(() => {
     fetchAllData();
   }, []);
@@ -78,7 +78,7 @@ export default function UsersTable({ users, setUsers }) {
       renderCell: (params) => {
         return (
           <Box>
-            <Avatar src={params.value} />
+            <img src={params.value} />
             {params.value}
           </Box>
         );

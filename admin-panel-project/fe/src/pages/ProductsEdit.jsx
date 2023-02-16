@@ -1,11 +1,13 @@
 import { useLocation, Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Box, TextField, Typography, Button } from "@mui/material";
+import { ProductsContext } from "../contexts/ProductsContext";
+import { editProducts } from "../services/axiosProductsSerces";
 
-export default function ProductsEdit({ products, setProducts }) {
+export default function ProductsEdit() {
   let data = useLocation();
+  const { products, setProducts, URL } = useContext(ProductsContext);
   //   console.log("data", data.state.product);
-  const URL = "http://localhost:8080/ecommerce";
   const [currentProduct, setCurrentProduct] = useState(data.state.product[0]);
 
   function handleImage(e) {
@@ -42,32 +44,7 @@ export default function ProductsEdit({ products, setProducts }) {
     setCurrentProduct({ ...currentProduct, rating: e.target.value });
   }
   async function handleEdit() {
-    const putData = {
-      id: currentProduct.id,
-      image: currentProduct.image,
-      title: currentProduct.title,
-      subtitle: currentProduct.subtitle,
-      price: currentProduct.price,
-      discount: currentProduct.discount,
-      description1: currentProduct.description1,
-      description2: currentProduct.description2,
-      code: currentProduct.code,
-      hashtag: currentProduct.hashtag,
-      technology: currentProduct.technology,
-      rating: currentProduct.rating,
-    };
-
-    const options = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(putData),
-    };
-    const FETCHED_DATA = await fetch(URL, options);
-    const FETCHED_JSON = await FETCHED_DATA.json();
-    setProducts(FETCHED_JSON.data);
-    console.log("da", products);
+    editProducts(URL, setProducts, currentProduct);
   }
 
   return (
