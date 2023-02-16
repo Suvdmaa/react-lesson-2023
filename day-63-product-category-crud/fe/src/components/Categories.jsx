@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
@@ -15,9 +16,48 @@ export default function Categories() {
       setCategories(FETCHED_JSON.data);
     }
   }
+
+  async function handleCategoryDelete(categoryId) {
+    console.log(categoryId);
+
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        categoryId: categoryId,
+      }),
+    };
+
+    const FETCHED_DATA = await fetch(URL, options);
+    const FETCHED_JSON = await FETCHED_DATA.json();
+    if (FETCHED_JSON.status === "success") {
+      toast(`Category with id = ${categoryId} deleted successfully`);
+      console.log(FETCHED_JSON.data);
+      setCategories(FETCHED_JSON.data);
+    }
+  }
+
+  async function handleSearchSubmit(e) {
+    e.preventDefault();
+    const searchInput = e.target.search.value;
+    const SEARCH_URL = `http://localhost:8080/search?value=${searchInput}`;
+    const FETCHED_DATA = await fetch(SEARCH_URL);
+    const FETCHED_JSON = await FETCHED_DATA.json();
+    if (FETCHED_JSON.status === "success") {
+      setCategories(FETCHED_JSON.data);
+    }
+  }
+
   return (
     <div>
       <h1>Category List</h1>
+      <form onSubmit={handleSearchSubmit}>
+        <input name="search" />
+        <button type="submit">Search </button>
+      </form>
+      <br />
       <table>
         <thead>
           <tr>
@@ -35,10 +75,16 @@ export default function Categories() {
                   <td>{category.id}</td>
                   <td>{category.name}</td>
                   <td>
-                    <button>Edit</button>
+                    <a href={`/category/edit/${category.id}`}>Edit</a>
                   </td>
                   <td>
-                    <button>Delete</button>
+                    <button
+                      onClick={() => {
+                        handleCategoryDelete(category.id);
+                      }}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               );
