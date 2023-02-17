@@ -1,4 +1,4 @@
-import { React } from "react";
+import React from "react";
 import { newTimer } from "./Helpers";
 import EditableTimerList from "./EditableTimerList";
 import ToggleableTimerForm from "./ToggleableTimerForm.jsx";
@@ -15,6 +15,7 @@ class TimersDashboard extends React.Component {
     this.deleteTimer = this.deleteTimer.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
+    this.handleCreateFormSubmit = this.handleCreateFormSubmit.bind(this);
     this.URL = "http://localhost:8080/timers";
   }
   // const [timers, setTimers] = useState({ timers: [] });
