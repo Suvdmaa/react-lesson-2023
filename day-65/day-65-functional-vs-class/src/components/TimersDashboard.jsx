@@ -1,16 +1,20 @@
-import { useEffect, useState, React } from "react";
+import { React } from "react";
 import { newTimer } from "./Helpers";
 import EditableTimerList from "./EditableTimerList";
 import ToggleableTimerForm from "./ToggleableTimerForm.jsx";
 import projects from "../data/data.js";
 
 class TimersDashboard extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       timers: [],
     };
-
+    this.createTimer = this.createTimer.bind(this);
+    this.updateTimer = this.updateTimer.bind(this);
+    this.deleteTimer = this.deleteTimer.bind(this);
+    this.startTimer = this.startTimer.bind(this);
+    this.stopTimer = this.stopTimer.bind(this);
     this.URL = "http://localhost:8080/timers";
   }
   // const [timers, setTimers] = useState({ timers: [] });
@@ -48,13 +52,13 @@ class TimersDashboard extends React.Component {
 
   createTimer(timer) {
     const t = newTimer(timer);
-    this.setState({ timers: this.timers.timers.concat(t) });
+    this.setState({ timers: this.state.timers.concat(t) });
   }
 
   startTimer(timerId) {
     const now = Date.now();
     this.setState({
-      timers: this.timers.timers.map((timer) => {
+      timers: this.state.timers.map((timer) => {
         if (timer.id === timerId) {
           console.log(timer);
           timer.runningSince = now;
@@ -70,7 +74,7 @@ class TimersDashboard extends React.Component {
     const now = Date.now();
 
     this.setState({
-      timers: this.timers.timers.map((timer) => {
+      timers: this.state.timers.map((timer) => {
         if (timer.id === timerId) {
           const lastElapsed = now - timer.runningSince;
           timer.elapsed = timer.elapsed + lastElapsed;
@@ -83,7 +87,7 @@ class TimersDashboard extends React.Component {
 
   updateTimer(attrs) {
     this.setState({
-      timers: this.timers.timers.map((timer) => {
+      timers: this.state.timers.map((timer) => {
         if (timer.id === attrs.id) {
           timer.title = attrs.title;
           timer.project = attrs.project;
@@ -95,7 +99,7 @@ class TimersDashboard extends React.Component {
 
   deleteTimer(timerId) {
     this.setState({
-      timers: this.timers.timers.filter((t) => t.id !== timerId),
+      timers: this.state.timers.filter((t) => t.id !== timerId),
     });
   }
 
@@ -103,10 +107,10 @@ class TimersDashboard extends React.Component {
     return (
       <div>
         <h1>Timers</h1>
-        {this.timers.timers && (
+        {this.state.timers && (
           <div>
             <EditableTimerList
-              timers={this.timers.timers}
+              timers={this.state.timers}
               onFormSubmit={this.handleEditFormSubmit}
               onTrashClick={this.handleTrashClick}
               onStartClick={this.handleStartClick}
