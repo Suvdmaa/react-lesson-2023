@@ -10,12 +10,17 @@ class TimersDashboard extends React.Component {
     this.state = {
       timers: [],
     };
+    this.handleCreateFormSubmit = this.handleCreateFormSubmit.bind(this);
+    this.handleEditFormSubmit = this.handleEditFormSubmit.bind(this);
+    this.handleTrashClick = this.handleTrashClick.bind(this);
+    this.handleStartClick = this.handleStartClick.bind(this);
+    this.handleStopClick = this.handleStopClick.bind(this);
     this.createTimer = this.createTimer.bind(this);
-    this.updateTimer = this.updateTimer.bind(this);
-    this.deleteTimer = this.deleteTimer.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
-    this.handleCreateFormSubmit = this.handleCreateFormSubmit.bind(this);
+    this.updateTimer = this.updateTimer.bind(this);
+    this.deleteTimer = this.deleteTimer.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
     this.URL = "http://localhost:8080/timers";
   }
   // const [timers, setTimers] = useState({ timers: [] });
