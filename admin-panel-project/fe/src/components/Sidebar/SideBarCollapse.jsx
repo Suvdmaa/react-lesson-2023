@@ -33,6 +33,14 @@ const dataListUser = [
     ),
   },
   { icon: <ArrowRightIcon />, label: "User Edit" },
+  {
+    icon: <ArrowRightIcon />,
+    label: (
+      <Link to="/user-role" style={{ textDecoration: "none", color: "orange" }}>
+        User Role
+      </Link>
+    ),
+  },
 ];
 
 export default function SideBarCollapse({ open, setOpen }) {
