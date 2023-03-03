@@ -76,12 +76,7 @@ export default function UsersTable() {
       headerName: "Avatar",
       width: 100,
       renderCell: (params) => {
-        return (
-          <Box>
-            <img src={params.value} />
-            {params.value}
-          </Box>
-        );
+        return <img src={params.value} />;
       },
     },
     {

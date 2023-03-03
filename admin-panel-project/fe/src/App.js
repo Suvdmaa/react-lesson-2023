@@ -22,6 +22,8 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { ProductsContextProvider } from "./contexts/ProductsContext";
 import { UserContextProvider } from "./contexts/UserContext";
+import UserRole from "./pages/UserRole";
+import UserRoleAdd from "./components/UserRoleAdd";
 
 const light = {
   palette: {
@@ -79,6 +81,8 @@ function App() {
                     element={<ProductsEdit />}
                   />
                   <Route path="/user/edit/:id" element={<UserEdit />} />
+                  <Route path="/user-role" element={<UserRole />} />
+                  <Route path="/user-role/add" element={<UserRoleAdd />} />
                 </Routes>
               </Box>
             </Box>

@@ -47,7 +47,7 @@ export default function EcommerceTable() {
     {
       field: "image",
       headerName: "Image",
-      rederCell: (params) => {
+      renderCell: (params) => {
         return <img src={params.row.image} width="100px" alt="pic" />;
       },
     },
