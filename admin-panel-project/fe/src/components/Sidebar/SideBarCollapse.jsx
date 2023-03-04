@@ -12,7 +12,14 @@ import { Link } from "react-router-dom";
 const dataListEcommerce = [
   { icon: <ArrowRightIcon />, label: "Product Manage" },
   { icon: <ArrowRightIcon />, label: "Product Grid" },
-  { icon: <ArrowRightIcon />, label: "Product Page" },
+  {
+    icon: <ArrowRightIcon />,
+    label: (
+      <Link to="/products" style={{ textDecoration: "none", color: "orange" }}>
+        Product Page
+      </Link>
+    ),
+  },
 ];
 
 const dataListUser = [
@@ -36,7 +43,10 @@ const dataListUser = [
   {
     icon: <ArrowRightIcon />,
     label: (
-      <Link to="/user-role" style={{ textDecoration: "none", color: "orange" }}>
+      <Link
+        to="/user-roles"
+        style={{ textDecoration: "none", color: "orange" }}
+      >
         User Role
       </Link>
     ),
@@ -52,7 +62,7 @@ export default function SideBarCollapse({ open, setOpen }) {
           <ShoppingCartIcon />
         </ListItemIcon>
         <Link
-          to="/ecommerce"
+          to="/products"
           style={{ textDecoration: "none", color: "#1493ff " }}
         >
           <ListItemText primary="E-commerce" />

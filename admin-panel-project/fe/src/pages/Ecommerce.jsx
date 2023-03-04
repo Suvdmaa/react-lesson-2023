@@ -1,5 +1,5 @@
 import * as React from "react";
-import EcommerceTable from "../components/EcommerceTable";
+import EcommerceTable from "./EcommerceTable";
 
 export default function Ecommerce() {
   return (

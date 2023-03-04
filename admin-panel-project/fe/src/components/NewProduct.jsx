@@ -29,7 +29,7 @@ export default function NewProduct() {
 
   async function handleSubmit(e) {
     toast(`You saved product`);
-    navigate("/ecommerce");
+    navigate("/products");
     addProducts(e, setProducts, URL);
   }
   return (
@@ -39,7 +39,7 @@ export default function NewProduct() {
         <Box sx={{ display: "flex" }}>
           <h3 style={{ width: 300 }}>Image</h3>
           <TextField
-            name="image"
+            name="image_path"
             variant={"filled"}
             fullWidth={true}
             sx={{ width: 600 }}
@@ -52,18 +52,7 @@ export default function NewProduct() {
             id="outlined-title"
             type="text"
             sx={{ width: 600 }}
-            name="title"
-            variant={"filled"}
-          />
-        </Box>
-        <br />
-        <Box sx={{ display: "flex" }}>
-          <h3 style={{ width: 300 }}>Subtitle</h3>
-          <TextField
-            id="outlined-subtitle"
-            type="text"
-            sx={{ width: 600 }}
-            name="subtitle"
+            name="product_name"
             variant={"filled"}
           />
         </Box>
@@ -74,7 +63,18 @@ export default function NewProduct() {
             id="outlined-price"
             type="number"
             sx={{ width: 600 }}
-            name="price"
+            name="product_price"
+            variant={"filled"}
+          />
+        </Box>
+        <br />
+        <Box sx={{ display: "flex" }}>
+          <h3 style={{ width: 300 }}>Quantity</h3>
+          <TextField
+            id="outlined-price"
+            type="number"
+            sx={{ width: 600 }}
+            name="product_quantity"
             variant={"filled"}
           />
         </Box>
@@ -91,24 +91,13 @@ export default function NewProduct() {
         </Box>
         <br />
         <Box sx={{ display: "flex" }}>
-          <h3 style={{ width: 300 }}>Description 1</h3>
+          <h3 style={{ width: 300 }}>Description </h3>
           <TextField
             id="outlined-description1"
             type="text"
             sx={{ width: 600 }}
             variant={"filled"}
-            name="description1"
-          />
-        </Box>
-        <br />
-        <Box sx={{ display: "flex" }}>
-          <h3 style={{ width: 300 }}>Description 2</h3>
-          <TextField
-            id="outlined-description2"
-            type="text"
-            sx={{ width: 600 }}
-            name="description2"
-            variant={"filled"}
+            name="product_description"
           />
         </Box>
         <br />
@@ -153,6 +142,17 @@ export default function NewProduct() {
             type="number"
             sx={{ width: 600 }}
             name="rating"
+            variant={"filled"}
+          />
+        </Box>
+        <br />
+        <Box sx={{ display: "flex" }}>
+          <h3 style={{ width: 300 }}>Category ID</h3>
+          <TextField
+            id="outlined-rating"
+            type="number"
+            sx={{ width: 600 }}
+            name="product_category_id"
             variant={"filled"}
           />
         </Box>

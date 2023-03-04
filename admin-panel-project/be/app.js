@@ -6,6 +6,8 @@ import express from "express";
 import cors from "cors";
 // const fs = require("fs");
 import role_router from "./routes/user-role.js";
+import product_router from "./routes/products.js";
+import user_router from "./routes/users.js";
 
 // configuration of modules
 const app = express();
@@ -14,6 +16,8 @@ const PORT = 8080;
 app.use(cors());
 app.use(express.json());
 app.use(role_router);
+app.use(product_router);
+app.use(user_router);
 
 app.get("/", (request, response) => {
   response.send("<h1>User Role</h1>");
