@@ -4,6 +4,8 @@ import { Box, TextField, Typography, Button } from "@mui/material";
 import { ProductsContext } from "../contexts/ProductsContext";
 import { editProducts } from "../services/axiosProductsSerces";
 import { useNavigate } from "react-router-dom";
+import { styled } from "@mui/material/styles";
+import { green, purple, indigo } from "@mui/material/colors";
 
 export default function ProductsEdit() {
   let data = useLocation();
@@ -55,6 +57,20 @@ export default function ProductsEdit() {
     editProducts(URL, setProducts, currentProduct);
     navigate("/products");
   }
+  const ColorButtonSave = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(purple[500]),
+    backgroundColor: green["A400"],
+    "&:hover": {
+      backgroundColor: green["A700"],
+    },
+  }));
+  const ColorButtonBack = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(indigo[900]),
+    backgroundColor: indigo["A400"],
+    "&:hover": {
+      backgroundColor: indigo["A200"],
+    },
+  }));
 
   return (
     <Box sx={{ mx: "50px", my: "50px", p: "50px", border: 1, borderRadius: 2 }}>
@@ -214,11 +230,15 @@ export default function ProductsEdit() {
             />
           </Box>
           <br />
-          <Button variant="outlined" onClick={handleEdit}>
+          <ColorButtonSave
+            variant="outlined"
+            onClick={handleEdit}
+            sx={{ mx: 1 }}
+          >
             Save
-          </Button>
+          </ColorButtonSave>
           <Link to={"/products"} style={{ textDecoration: "none" }}>
-            <Button variant="outlined">Back</Button>
+            <ColorButtonBack variant="outlined">Back</ColorButtonBack>
           </Link>
         </Box>
       )}

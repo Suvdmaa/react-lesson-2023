@@ -20,6 +20,17 @@ const dataListEcommerce = [
       </Link>
     ),
   },
+  {
+    icon: <ArrowRightIcon />,
+    label: (
+      <Link
+        to="/product-category"
+        style={{ textDecoration: "none", color: "orange" }}
+      >
+        Product Category
+      </Link>
+    ),
+  },
 ];
 
 const dataListUser = [

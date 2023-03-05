@@ -1,5 +1,5 @@
 import { TextField, Box, MenuItem } from "@mui/material";
-import { Button, Typography, Link } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { green, purple, indigo } from "@mui/material/colors";
 import { toast, ToastContainer } from "react-toastify";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { ProductsContext } from "../contexts/ProductsContext";
 import { useContext } from "react";
 import { addProducts } from "../services/axiosProductsSerces";
+import { Link } from "react-router-dom";
 
 export default function NewProduct() {
   const { products, setProducts, URL } = useContext(ProductsContext);
@@ -161,8 +162,9 @@ export default function NewProduct() {
           <ColorButtonSave variant="outlined" sx={{ mx: 1 }} type="submit">
             Save
           </ColorButtonSave>
-
-          <ColorButtonBack variant="outlined">Back</ColorButtonBack>
+          <Link to={"/products"}>
+            <ColorButtonBack variant="outlined">Back</ColorButtonBack>
+          </Link>
           <ToastContainer />
         </Box>
       </form>

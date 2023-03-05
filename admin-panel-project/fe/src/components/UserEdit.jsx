@@ -12,6 +12,9 @@ import {
 } from "@mui/material";
 import { UserContext } from "../contexts/UserContext";
 import { FormGroup } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { styled } from "@mui/material/styles";
+import { green, purple, indigo } from "@mui/material/colors";
 
 export default function UserEdit() {
   const { users, setUsers, URL } = useContext(UserContext);
@@ -19,6 +22,7 @@ export default function UserEdit() {
   //   console.log("data", data.state.product);
   const [currentUser, setCurrentUser] = useState(data.state.user[0]);
   //   const [user, setProduct] = useState([]);
+  const navigate = useNavigate();
 
   function handleFirstName(e) {
     setCurrentUser({ ...currentUser, first_name: e.target.value });
@@ -78,7 +82,23 @@ export default function UserEdit() {
     const FETCHED_DATA = await fetch(URL, options);
     const FETCHED_JSON = await FETCHED_DATA.json();
     setUsers(FETCHED_JSON);
+    navigate("/users");
   }
+
+  const ColorButtonSave = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(purple[500]),
+    backgroundColor: green["A400"],
+    "&:hover": {
+      backgroundColor: green["A700"],
+    },
+  }));
+  const ColorButtonBack = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(indigo[900]),
+    backgroundColor: indigo["A400"],
+    "&:hover": {
+      backgroundColor: indigo["A200"],
+    },
+  }));
 
   return (
     <Box sx={{ mx: "50px", my: "50px", p: "50px", border: 1, borderRadius: 2 }}>
@@ -96,6 +116,7 @@ export default function UserEdit() {
               defaultValue={currentUser.first_name}
               onChange={handleFirstName}
               sx={{ width: 600 }}
+              variant={"filled"}
             />
           </Box>
           <br />
@@ -109,6 +130,7 @@ export default function UserEdit() {
               defaultValue={currentUser.last_name}
               onChange={handleLastName}
               sx={{ width: 600 }}
+              variant={"filled"}
             />
           </Box>
           <br />
@@ -121,6 +143,7 @@ export default function UserEdit() {
               defaultValue={currentUser.birth_date}
               onChange={handleBirthData}
               sx={{ width: 600 }}
+              variant={"filled"}
             />
           </Box>
           <br />
@@ -134,6 +157,7 @@ export default function UserEdit() {
               defaultValue={currentUser.email}
               onChange={handleEmail}
               sx={{ width: 600 }}
+              variant={"filled"}
             />
           </Box>
           <br />
@@ -147,6 +171,7 @@ export default function UserEdit() {
               defaultValue={currentUser.phone_number}
               onChange={handlePhoneNumber}
               sx={{ width: 600 }}
+              variant={"filled"}
             />
           </Box>
           <br />
@@ -159,6 +184,7 @@ export default function UserEdit() {
               defaultValue={currentUser.address}
               onChange={handleAddress}
               sx={{ width: 600 }}
+              variant={"filled"}
             />
           </Box>
           <br />
@@ -172,6 +198,7 @@ export default function UserEdit() {
               defaultValue={currentUser.user_role_id}
               onChange={handleUserRoleId}
               sx={{ width: 600 }}
+              variant={"filled"}
             />
           </Box>
           <br />
@@ -226,6 +253,7 @@ export default function UserEdit() {
               defaultValue={currentUser.avatar}
               onChange={handleAvatar}
               sx={{ width: 600 }}
+              variant={"filled"}
             />
           </Box>
           <br />
@@ -239,16 +267,21 @@ export default function UserEdit() {
               defaultValue={currentUser.password}
               onChange={handlePassword}
               sx={{ width: 600 }}
+              variant={"filled"}
             />
           </Box>
           <br />
+
+          <ColorButtonSave
+            variant="outlined"
+            onClick={handleEdit}
+            sx={{ mx: 1 }}
+          >
+            Save
+          </ColorButtonSave>
+
           <Link to={"/users"} style={{ textDecoration: "none" }}>
-            <Button variant="outlined" onClick={handleEdit}>
-              Save
-            </Button>
-          </Link>
-          <Link to={"/users"} style={{ textDecoration: "none" }}>
-            <Button variant="outlined">Back</Button>
+            <ColorButtonBack variant="outlined">Back</ColorButtonBack>
           </Link>
         </Box>
       )}
