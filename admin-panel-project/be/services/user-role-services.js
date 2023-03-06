@@ -8,19 +8,19 @@ export async function getUserRole() {
   return rows;
 }
 
-export async function updateUserRole() {
-  const query = `UPDATE user_role SET user_role_name='${userRoleName}' where user_role_id=${userRoleId}`;
-  const [rows] = await pool.query(query);
-  return rows;
-}
-
-export async function addUserRole() {
-  const query = `INSERT INTO user_role VALUES(?)`;
+export async function addUserRole(userRoleName) {
+  const query = `INSERT INTO user_role (user_role_name) VALUES(?)`;
   const [rows] = await pool.query(query, [userRoleName]);
   return rows;
 }
 
-export async function deleteUserRole() {
+export async function updateUserRole(userRoleName, id) {
+  const query = `UPDATE user_role SET user_role_name='${userRoleName}' where user_role_id=${id}`;
+  const [rows] = await pool.query(query);
+  return rows;
+}
+
+export async function deleteUserRole(userRoleId) {
   const query = `DELETE from user_role where user_role_id=${userRoleId}`;
   const [rows] = await pool.query(query);
   return rows;

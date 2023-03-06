@@ -1,13 +1,13 @@
-import { Typography, TextField, Box, Button } from "@mui/material";
-import { useEffect, useContext } from "react";
+import { useContext, useEffect } from "react";
+import { ProductCateContext } from "../contexts/ProductCategoryContext";
 import { useNavigate } from "react-router-dom";
-import { UserRoleContext } from "../contexts/UserRoleContext";
+import { Button, TextField, Typography, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { green, purple, indigo } from "@mui/material/colors";
 import { Link } from "react-router-dom";
 
-export default function UserRoleAdd() {
-  const { userRole, setUserRole, URL } = useContext(UserRoleContext);
+export default function ProductCategoryAdd() {
+  const { productCate, setProductCate, URL } = useContext(ProductCateContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,13 +17,14 @@ export default function UserRoleAdd() {
   async function fetchAllData() {
     const FETCHED_DATA = await fetch(URL);
     const FETCHED_JSON = await FETCHED_DATA.json();
-    setUserRole(FETCHED_JSON);
+    setProductCate(FETCHED_JSON);
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
     const postData = {
-      userRoleName: e.target.roleName.value,
+      product_category_name: e.target.product_category_name.value,
+      product_category_description: e.target.product_category_description.value,
     };
     const options = {
       method: "POST",
@@ -35,8 +36,8 @@ export default function UserRoleAdd() {
 
     const FETCHED_DATA = await fetch(URL, options);
     const FETCHED_JSON = await FETCHED_DATA.json();
-    setUserRole(FETCHED_JSON.data);
-    navigate("/user-roles");
+    setProductCate(FETCHED_JSON);
+    navigate("/product-category");
   }
 
   const ColorButtonSave = styled(Button)(({ theme }) => ({
@@ -55,24 +56,39 @@ export default function UserRoleAdd() {
   }));
 
   return (
-    <Box sx={{ mx: "50px", my: "50px", p: "50px", border: 1, borderRadius: 2 }}>
+    <Box sx={{ mx: "50px", my: "50x", p: "50px", border: 1, borderRadius: 2 }}>
       <form onSubmit={handleSubmit}>
-        <Typography variant="h4">Add User Role</Typography>
+        <Typography variant="h4">Add Product Category</Typography>
         <br />
         <Box sx={{ display: "flex" }}>
           <Typography variant="h6" style={{ width: 300 }}>
-            User Role Name
+            Category Name
           </Typography>
-          <TextField name="roleName" label="Role name" variant="filled" />
+          <TextField
+            name="product_category_name"
+            variant="filled"
+            sx={{ width: 600 }}
+          />
         </Box>
         <br />
-        <ColorButtonSave valriant="outlined" type="submit" sx={{ mx: 1 }}>
+        <Box sx={{ display: "flex" }}>
+          <Typography variant="h6" style={{ width: 300 }}>
+            Description
+          </Typography>
+          <TextField
+            name="product_category_description"
+            variant="filled"
+            sx={{ width: 600 }}
+          />
+        </Box>
+
+        <br />
+        <ColorButtonSave variant="outlined" sx={{ mx: 1 }} type="submit">
           Save
         </ColorButtonSave>
-        <Link to={"/user-roles"} style={{ textDecoration: "none" }}>
+        <Link to="/product-category">
           <ColorButtonBack variant="outlined">Back</ColorButtonBack>
         </Link>
-        <br />
       </form>
     </Box>
   );

@@ -1,4 +1,4 @@
-import UsersTable from "../components/UsersTable";
+import UsersTable from "./UsersTable";
 import * as React from "react";
 import { Container } from "@mui/material";
 

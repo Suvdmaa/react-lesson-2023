@@ -20,10 +20,10 @@ export default function EcommerceTable() {
   async function fetchAllData() {
     const FETCHED_DATA = await fetch(URL);
     const FETCHED_JSON = await FETCHED_DATA.json();
-    setProducts(FETCHED_JSON.data);
+    setProducts(FETCHED_JSON);
   }
-  async function handleDelete(productId) {
-    deleteProducts(productId, setProducts, URL);
+  async function handleDelete(id) {
+    deleteProducts(id, setProducts, URL);
   }
 
   const ColorButton = styled(Button)(({ theme }) => ({
@@ -45,22 +45,32 @@ export default function EcommerceTable() {
   const columns = [
     { field: "id", headerName: "ID", width: 90, type: "string" },
     {
-      field: "image",
+      field: "image_path",
       headerName: "Image",
       renderCell: (params) => {
-        return <img src={params.row.image} width="100px" alt="pic" />;
+        return <img src={params.row.image_path} width="100px" alt="pic" />;
       },
     },
-    { field: "title", headerName: "Title", width: 180, type: "string" },
-    { field: "subtitle", headerName: "Subtitle", width: 180, type: "string" },
-    { field: "price", headerName: "Price", width: 130, type: "number" },
+    { field: "product_name", headerName: "Title", width: 180, type: "string" },
     {
-      field: "description1",
-      headerName: "Description",
+      field: "product_quantity",
+      headerName: "Product Quantity",
       width: 130,
       type: "string",
     },
-    { field: "rating", headerName: "Rating", type: "number", width: 130 },
+    { field: "product_price", headerName: "Price", width: 130, type: "number" },
+    {
+      field: "product_description",
+      headerName: "Description",
+      width: 180,
+      type: "string",
+    },
+    {
+      field: "product_category_id",
+      headerName: "Category ID",
+      type: "number",
+      width: 130,
+    },
     {
       field: "actions",
       headerName: "Actions",
@@ -70,7 +80,7 @@ export default function EcommerceTable() {
           <Box>
             <Stack direction="row" spacing={3}>
               <Link
-                to={`/ecommerce/edit/${params.row.id}`}
+                to={`/product/edit/${params.row.id}`}
                 state={{
                   product: products.filter((p) => p.id === params.row.id),
                 }}
@@ -102,7 +112,7 @@ export default function EcommerceTable() {
     const FETCHED_DATA = await fetch(SEARCH_URL);
     const FETCHED_JSON = await FETCHED_DATA.json();
     if (FETCHED_JSON.status === "success") {
-      setProducts(FETCHED_JSON.data);
+      setProducts(FETCHED_JSON);
     }
   }
 
@@ -112,7 +122,7 @@ export default function EcommerceTable() {
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           Products 11 total
           <Link
-            to="/ecommerce/new"
+            to="/product/new"
             style={{ textDecoration: "none", paddingTop: 10 }}
           >
             <ColorButton variant="contained">Create Product</ColorButton>

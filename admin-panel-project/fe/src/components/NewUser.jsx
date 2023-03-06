@@ -14,6 +14,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function NewUser() {
   const { users, setUsers, URL } = useContext(UserContext);
@@ -22,16 +23,18 @@ export default function NewUser() {
   async function handleSubmit(e) {
     e.preventDefault();
     navigate("/users");
-    console.log(e.target.disabled.value);
+    console.log(e.target.userRoleId.value);
     const postData = {
       firstname: e.target.firstname.value,
       lastname: e.target.lastname.value,
-      phonenumber: e.target.phonenumber.value,
       email: e.target.email.value,
-      rowradio: e.target.rowradio.value,
-      disabled: e.target.disabled.value,
+      birthDate: e.target.birthDate.value,
+      phonenumber: e.target.phonenumber.value,
+      address: e.target.address.value,
+      // rowradio: e.target.rowradio.value,
       password: e.target.password.value,
-      avatar: e.target.avatar.value,
+      // avatar: e.target.avatar.value,
+      user_role_id: e.target.userRoleId.value,
     };
 
     const options = {
@@ -44,7 +47,8 @@ export default function NewUser() {
 
     const FETCHED_DATA = await fetch(URL, options);
     const FETCHED_JSON = await FETCHED_DATA.json();
-    setUsers(FETCHED_JSON.data);
+    console.log(FETCHED_JSON);
+    setUsers(FETCHED_JSON);
   }
   console.log(users);
 
@@ -73,9 +77,8 @@ export default function NewUser() {
           />
           <TextField
             id="outlined-number"
-            label="Phone Number"
-            type="number"
-            name="phonenumber"
+            label="Birth Date"
+            name="birthDate"
             fullWidth
           />
           <TextField
@@ -83,6 +86,26 @@ export default function NewUser() {
             label="Email"
             type="email"
             name="email"
+            fullWidth
+          />
+          <TextField
+            id="outlined-number"
+            label="Phone Number"
+            type="number"
+            name="phonenumber"
+            fullWidth
+          />
+          <TextField
+            id="outlined-number"
+            label="Address"
+            name="address"
+            fullWidth
+          />
+          <TextField
+            id="outlined-number"
+            label="User Role Id"
+            type="number"
+            name="userRoleId"
             fullWidth
           />
           <FormControl sx={{ m: 2, display: "block" }}>
@@ -111,7 +134,7 @@ export default function NewUser() {
               />
             </RadioGroup>
           </FormControl>
-          <Box sx={{ m: 2 }}>
+          {/* <Box sx={{ m: 2 }}>
             <FormLabel id="demo-radio-buttons-group-label">Disabled</FormLabel>
             <br />
             <FormGroup>
@@ -121,14 +144,14 @@ export default function NewUser() {
                 name="disabled"
               />
             </FormGroup>
-          </Box>
-          <Box sx={{ mx: 1, my: 2 }}>
+          </Box> */}
+          {/* <Box sx={{ mx: 1, my: 2 }}>
             <h4>Avatar</h4>
             <Button variant="contained" component="label">
               Upload an image
               <input hidden multiple type="file" name="avatar" />
             </Button>
-          </Box>
+          </Box> */}
           <TextField
             id="outlined-password-input"
             label="Password"
@@ -143,7 +166,10 @@ export default function NewUser() {
               <ToastContainer />
             </Button>
             <Button variant="outlined">Reset</Button>
-            <Button variant="outlined">Cancel</Button>
+
+            <Link to="/users" style={{ textDecoration: "none" }}>
+              <Button variant="outlined">Cancel</Button>
+            </Link>
           </Stack>
         </Box>
       </form>

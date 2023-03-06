@@ -12,6 +12,9 @@ import {
 } from "@mui/material";
 import { UserContext } from "../contexts/UserContext";
 import { FormGroup } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { styled } from "@mui/material/styles";
+import { green, purple, indigo } from "@mui/material/colors";
 
 export default function UserEdit() {
   const { users, setUsers, URL } = useContext(UserContext);
@@ -19,15 +22,16 @@ export default function UserEdit() {
   //   console.log("data", data.state.product);
   const [currentUser, setCurrentUser] = useState(data.state.user[0]);
   //   const [user, setProduct] = useState([]);
+  const navigate = useNavigate();
 
   function handleFirstName(e) {
-    setCurrentUser({ ...currentUser, firstname: e.target.value });
+    setCurrentUser({ ...currentUser, first_name: e.target.value });
   }
   function handleLastName(e) {
-    setCurrentUser({ ...currentUser, lastname: e.target.value });
+    setCurrentUser({ ...currentUser, last_name: e.target.value });
   }
   function handlePhoneNumber(e) {
-    setCurrentUser({ ...currentUser, phonenumber: e.target.value });
+    setCurrentUser({ ...currentUser, phone_number: e.target.value });
   }
   function handleEmail(e) {
     setCurrentUser({ ...currentUser, email: e.target.value });
@@ -35,8 +39,14 @@ export default function UserEdit() {
   function handleRole(e) {
     setCurrentUser({ ...currentUser, rowradio: e.target.value });
   }
-  function handleDisabled(e) {
-    setCurrentUser({ ...currentUser, disabled: e.target.value });
+  function handleBirthData(e) {
+    setCurrentUser({ ...currentUser, birth_date: e.target.value });
+  }
+  function handleAddress(e) {
+    setCurrentUser({ ...currentUser, address: e.target.value });
+  }
+  function handleUserRoleId(e) {
+    setCurrentUser({ ...currentUser, user_role_idd: e.target.value });
   }
   function handleAvatar(e) {
     setCurrentUser({ ...currentUser, avatar: e.target.value });
@@ -45,13 +55,17 @@ export default function UserEdit() {
     setCurrentUser({ ...currentUser, password: e.target.value });
   }
 
+  console.log(currentUser);
   async function handleEdit() {
     const putData = {
       id: currentUser.id,
-      firstname: currentUser.firstname,
-      lastname: currentUser.lastname,
-      phonenumber: currentUser.phonenumber,
+      first_name: currentUser.first_name,
+      last_name: currentUser.last_name,
+      birth_date: currentUser.birth_date,
       email: currentUser.email,
+      phone_number: currentUser.phone_number,
+      address: currentUser.address,
+      user_role_id: currentUser.user_role_id,
       rowradio: currentUser.rowradio,
       disabled: currentUser.disabled,
       password: currentUser.password,
@@ -67,8 +81,24 @@ export default function UserEdit() {
     };
     const FETCHED_DATA = await fetch(URL, options);
     const FETCHED_JSON = await FETCHED_DATA.json();
-    setUsers(FETCHED_JSON.data);
+    setUsers(FETCHED_JSON);
+    navigate("/users");
   }
+
+  const ColorButtonSave = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(purple[500]),
+    backgroundColor: green["A400"],
+    "&:hover": {
+      backgroundColor: green["A700"],
+    },
+  }));
+  const ColorButtonBack = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(indigo[900]),
+    backgroundColor: indigo["A400"],
+    "&:hover": {
+      backgroundColor: indigo["A200"],
+    },
+  }));
 
   return (
     <Box sx={{ mx: "50px", my: "50px", p: "50px", border: 1, borderRadius: 2 }}>
@@ -82,10 +112,11 @@ export default function UserEdit() {
             </Typography>
             <TextField
               type="text"
-              name="firstname"
-              defaultValue={currentUser.firstname}
+              name="first_name"
+              defaultValue={currentUser.first_name}
               onChange={handleFirstName}
               sx={{ width: 600 }}
+              variant={"filled"}
             />
           </Box>
           <br />
@@ -95,23 +126,24 @@ export default function UserEdit() {
             </Typography>
             <TextField
               type="text"
-              name="lastname"
-              defaultValue={currentUser.lastname}
+              name="last_name"
+              defaultValue={currentUser.last_name}
               onChange={handleLastName}
               sx={{ width: 600 }}
+              variant={"filled"}
             />
           </Box>
           <br />
           <Box sx={{ display: "flex" }}>
             <Typography variant="h6" sx={{ width: 300 }}>
-              Phonenumber
+              Birth Date
             </Typography>
             <TextField
-              type="number"
-              name="phonenumber"
-              defaultValue={currentUser.phonenumber}
-              onChange={handlePhoneNumber}
+              name="birth_date"
+              defaultValue={currentUser.birth_date}
+              onChange={handleBirthData}
               sx={{ width: 600 }}
+              variant={"filled"}
             />
           </Box>
           <br />
@@ -125,6 +157,48 @@ export default function UserEdit() {
               defaultValue={currentUser.email}
               onChange={handleEmail}
               sx={{ width: 600 }}
+              variant={"filled"}
+            />
+          </Box>
+          <br />
+          <Box sx={{ display: "flex" }}>
+            <Typography variant="h6" sx={{ width: 300 }}>
+              Phonenumber
+            </Typography>
+            <TextField
+              type="number"
+              name="phone_number"
+              defaultValue={currentUser.phone_number}
+              onChange={handlePhoneNumber}
+              sx={{ width: 600 }}
+              variant={"filled"}
+            />
+          </Box>
+          <br />
+          <Box sx={{ display: "flex" }}>
+            <Typography variant="h6" sx={{ width: 300 }}>
+              Address
+            </Typography>
+            <TextField
+              name="address"
+              defaultValue={currentUser.address}
+              onChange={handleAddress}
+              sx={{ width: 600 }}
+              variant={"filled"}
+            />
+          </Box>
+          <br />
+          <Box sx={{ display: "flex" }}>
+            <Typography variant="h6" sx={{ width: 300 }}>
+              User Role Id
+            </Typography>
+            <TextField
+              type="number"
+              name="user_role_id"
+              defaultValue={currentUser.user_role_id}
+              onChange={handleUserRoleId}
+              sx={{ width: 600 }}
+              variant={"filled"}
             />
           </Box>
           <br />
@@ -154,7 +228,7 @@ export default function UserEdit() {
             </RadioGroup>
           </Box>
           <br />
-          <Box sx={{ display: "flex" }}>
+          {/* <Box sx={{ display: "flex" }}>
             <Typography variant="h6" sx={{ width: 300 }}>
               Disabled
             </Typography>
@@ -168,7 +242,7 @@ export default function UserEdit() {
               />
             </FormGroup>
           </Box>
-          <br />
+          <br /> */}
           <Box sx={{ display: "flex" }}>
             <Typography variant="h6" sx={{ width: 300 }}>
               Avatar
@@ -179,6 +253,7 @@ export default function UserEdit() {
               defaultValue={currentUser.avatar}
               onChange={handleAvatar}
               sx={{ width: 600 }}
+              variant={"filled"}
             />
           </Box>
           <br />
@@ -192,16 +267,21 @@ export default function UserEdit() {
               defaultValue={currentUser.password}
               onChange={handlePassword}
               sx={{ width: 600 }}
+              variant={"filled"}
             />
           </Box>
           <br />
+
+          <ColorButtonSave
+            variant="outlined"
+            onClick={handleEdit}
+            sx={{ mx: 1 }}
+          >
+            Save
+          </ColorButtonSave>
+
           <Link to={"/users"} style={{ textDecoration: "none" }}>
-            <Button variant="outlined" onClick={handleEdit}>
-              Save
-            </Button>
-          </Link>
-          <Link to={"/users"} style={{ textDecoration: "none" }}>
-            <Button variant="outlined">Back</Button>
+            <ColorButtonBack variant="outlined">Back</ColorButtonBack>
           </Link>
         </Box>
       )}

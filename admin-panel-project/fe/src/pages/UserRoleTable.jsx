@@ -1,28 +1,29 @@
-import * as React from "react";
-import { DataGrid } from "@mui/x-data-grid";
-import { Button, Box } from "@mui/material";
+import { Box, Typography, Button, TextField } from "@mui/material";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useEffect, useContext } from "react";
+import { DataGrid } from "@mui/x-data-grid";
 import { Stack } from "@mui/system";
-import { Avatar } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { green, pink, purple } from "@mui/material/colors";
 import { toast, ToastContainer } from "react-toastify";
-import { UserContext } from "../contexts/UserContext";
+import { useContext } from "react";
+import { UserRoleContext } from "../contexts/UserRoleContext";
+import { useNavigate } from "react-router-dom";
 
-export default function UsersTable() {
-  const { users, setUsers, URL } = useContext(UserContext);
+export default function UserRole() {
+  const { userRole, setUserRole, URL } = useContext(UserRoleContext);
+  const navigate = useNavigate();
+
   useEffect(() => {
     fetchAllData();
   }, []);
-
+  ("");
   async function fetchAllData() {
     const FETCHED_DATA = await fetch(URL);
     const FETCHED_JSON = await FETCHED_DATA.json();
-    setUsers(FETCHED_JSON.data);
+    setUserRole(FETCHED_JSON);
   }
-
-  async function handleDelete(userId) {
+  async function handleDelete(userRoleId) {
     toast(`You deleted User`);
     const options = {
       method: "DELETE",
@@ -30,12 +31,13 @@ export default function UsersTable() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        userId: userId,
+        userRoleId: userRoleId,
       }),
     };
     const FETCHED_DATA = await fetch(URL, options);
     const FETCHED_JSON = await FETCHED_DATA.json();
-    setUsers(FETCHED_JSON.data);
+    setUserRole(FETCHED_JSON);
+    navigate("/user-roles");
   }
 
   const ColorButton = styled(Button)(({ theme }) => ({
@@ -53,31 +55,13 @@ export default function UsersTable() {
       backgroundColor: pink["A400"],
     },
   }));
+
   const columns = [
-    { field: "id", headerName: "ID", type: "number", width: 90 },
+    { field: "id", headerName: "ID", width: 150 },
     {
-      field: "firstname",
-      headerName: "First name",
-      type: "string",
-      width: 180,
-    },
-    { field: "lastname", headerName: "Last name", type: "string", width: 180 },
-    {
-      field: "phonenumber",
-      headerName: "Phone Number",
-      type: "number",
-      width: 180,
-    },
-    { field: "email", headerName: "Email", type: "string", width: 200 },
-    { field: "rowradio", headerName: "Role", type: "string", width: 100 },
-    { field: "disabled", headerName: "Disabled", type: "boolean", width: 130 },
-    {
-      field: "avatar",
-      headerName: "Avatar",
-      width: 100,
-      renderCell: (params) => {
-        return <img src={params.value} />;
-      },
+      field: "user_role_name",
+      headerName: "User Role Name",
+      width: 200,
     },
     {
       field: "actions",
@@ -88,9 +72,9 @@ export default function UsersTable() {
           <Box>
             <Stack direction="row" spacing={3}>
               <Link
-                to={`/user/edit/${params.row.id}`}
+                to={`/user-role/edit/${params.row.id}`}
                 state={{
-                  user: users.filter((p) => p.id === params.row.id),
+                  userRoleName: userRole.filter((p) => p.id === params.row.id),
                 }}
                 style={{ textDecoration: "none" }}
               >
@@ -114,23 +98,24 @@ export default function UsersTable() {
   ];
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
-      <Box>
-        <h1>Users</h1>
-        <Box sx={{ display: "flex", justifyContent: "space-between", my: 2 }}>
-          <Link to="/user/new" style={{ textDecoration: "none" }}>
-            <Button variant="contained">NEW</Button>
-          </Link>
-          <Button variant="contained">ADD FILTER</Button>
-        </Box>
-      </Box>
-      <DataGrid
-        rows={users}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-      />
-    </div>
+    <Box sx={{ mx: "50px", my: "50px", p: "50px", border: 1, borderRadius: 2 }}>
+      <Typography variant="h4">User Role</Typography>
+      <Link to={"/user-role/add"} style={{ textDecoration: "none" }}>
+        <ColorButton variant="contained" color="success">
+          Add
+        </ColorButton>
+      </Link>
+      <div style={{ height: 350, width: "60%" }}>
+        <DataGrid
+          rows={userRole}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+          checkboxSelection
+        />
+      </div>
+
+      <br />
+    </Box>
   );
 }
