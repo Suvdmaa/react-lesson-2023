@@ -15,7 +15,7 @@ export default function UserRole() {
   useEffect(() => {
     fetchAllData();
   }, []);
-
+  ("");
   async function fetchAllData() {
     const FETCHED_DATA = await fetch(URL);
     const FETCHED_JSON = await FETCHED_DATA.json();
