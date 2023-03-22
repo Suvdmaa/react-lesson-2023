@@ -1,0 +1,17 @@
+POST http://localhost:8080/protected HTTP/1.1
+Content-Type: application/json
+
+{
+   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQxYTY3NDVlODUzNmExOTUxYTUwOGNmIiwiZW1haWwiOiJlbWFpbDEyMTIzM0BnbWFpbC5jb20iLCJpYXQiOjE2Nzk0NTgxNjIsImV4cCI6MTY3OTU0NDU2Mn0.fg-L7ygKWzQgUjGNYxt8us5ZK02IOAD9aoHwagt5AzI"
+}
+
+###
+
+POST http://localhost:8080/unprotected HTTP/1.1
+Content-Type: application/json
+
+{
+    "token": ""
+}
+
+###
