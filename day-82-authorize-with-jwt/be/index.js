@@ -3,17 +3,17 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const adminRouter = require("./routes/admin-api");
 const apiRouter = require("./routes/api");
+require("dotenv").config();
+
+const PORT = process.env.PORT;
+const MONGO_CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING;
 
 const app = express();
-const PORT = 8080;
 app.use(express.json());
 app.use(cors());
 
-const MONGO_CONNECTION_STRING =
-  "mongodb+srv://blackenkhboldsuvdmaa:k7zDjv%40K!t%40TsF@suvd.mba0zd4.mongodb.net/test";
-
-app.use(adminRouter);
-app.use(apiRouter);
+app.use("/admin", adminRouter);
+app.use("/api", apiRouter);
 
 app.listen(PORT, () => {
   mongoose
