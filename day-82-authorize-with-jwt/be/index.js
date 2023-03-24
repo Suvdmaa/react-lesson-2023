@@ -15,12 +15,6 @@ app.use(cors());
 app.use("/admin", adminRouter);
 app.use("/api", apiRouter);
 
-app.get("/", (request, response) => {
-  response.json({
-    data: [],
-  });
-});
-
 app.listen(PORT, () => {
   mongoose
     .connect(MONGO_CONNECTION_STRING)
