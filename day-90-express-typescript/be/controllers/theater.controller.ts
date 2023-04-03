@@ -23,15 +23,21 @@ export const getTheaterById = async (req: Request, res: Response) => {
 }
 
 export const searchTheaters = async (req: Request, res: Response) => {
+  const fields = ['state', 'street1', 'city', 'zipcode']
   const keyword: string = String(req.query.keyword)
   try {
+    // const theaters = await TheaterModel.find({
+    //   $or: [
+    //     { 'location.address.street1': { $regex: new ReqExp(keyword, 'i') } },
+    //     { 'location.address.city': { $regex: keyword } },
+    //     { 'location.address.zipcode': { $regex: keyword } },
+    //     { 'location.address.state': { $regex: keyword } },
+    //   ],
+    // })
     const theaters = await TheaterModel.find({
-      $or: [
-        { 'location.address.street1': keyword },
-        { 'location.address.city': keyword },
-        { 'location.address.zipcode': keyword },
-        { 'location.address.state': keyword },
-      ],
+      $or: fields.map((field) => ({
+        [`location.address.${field}`]: { $regex: new RegExp(keyword, 'i') },
+      })),
     })
     res.status(200).json(theaters)
   } catch (error) {
