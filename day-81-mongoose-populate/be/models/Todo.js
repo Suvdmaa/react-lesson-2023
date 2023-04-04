@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 const todoSchema = new mongoose.Schema({
   name: {
@@ -9,9 +9,9 @@ const todoSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
-});
+  category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
+})
 
-const Todo = mongoose.model("Todo", todoSchema);
+const Todo = mongoose.model('Todo', todoSchema)
 
-module.exports = Todo;
+module.exports = Todo

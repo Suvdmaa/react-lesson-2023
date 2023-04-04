@@ -27,8 +27,9 @@ interface ITheater {
   theaterId: number
   location: ILocation
 }
+
 const TheaterSchema: Schema = new Schema({})
 
-const TheaterModel = mongoose.model('Theater', TheaterSchema)
+const TheaterModel = mongoose.model<ITheater>('Theater', TheaterSchema)
 
 export default TheaterModel
