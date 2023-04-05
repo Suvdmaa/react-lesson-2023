@@ -52,7 +52,7 @@ export default function Theaters(): JSX.Element {
 
   return (
     <div>
-      <h1>Theaters</h1>
+      <h1>Theaters ID</h1>
       {theaters.map((d, index) => (
         <div key={index}>
           <h2>{d.theaterId}</h2>
