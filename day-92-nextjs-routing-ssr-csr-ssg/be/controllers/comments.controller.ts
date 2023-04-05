@@ -2,8 +2,8 @@ import CommentsModel from '../models/comments.model'
 import { Request, Response } from 'express'
 
 export const getComments = async (req: Request, res: Response) => {
-  const page: number = Number(req.query.page)
-  const commentsPerPage: number = Number(req.query.commentsPerPage)
+  const page: number = Number(req.query.page) || 0
+  const commentsPerPage: number = Number(req.query.commentsPerPage) || 30
   try {
     const comments = await CommentsModel.find()
       .limit(commentsPerPage)

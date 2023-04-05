@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import cors from 'cors'
 dotenv.config()
+
 import theaterRouter from './routes/theaters.api'
 import moviesRouter from './routes/movies.api'
 import commentsRouter from './routes/comment.api'
@@ -13,23 +14,23 @@ const MONGO_CONNECTION_STRING =
   process.env.MONGO_CONNECTION_STRING || 'mongodb://localhost:27017/test'
 
 let name: string = '<h1>Day 90 Express Typescript</h1>'
-let phonenumber: number = 99119911
-let isMarried: boolean = false
-let sheeps: Array<string> = ['sheep1', 'sheep2', 'sheep3']
-let sheep: string[] = ['sheep1', 'sheep2', 'sheep3']
+// let phonenumber: number = 99119911
+// let isMarried: boolean = false
+// let sheeps: Array<string> = ['sheep1', 'sheep2', 'sheep3']
+// let sheep: string[] = ['sheep1', 'sheep2', 'sheep3']
 
-let sheepObject: { name: string; age: number } = {
-  name: 'sheep1',
-  age: 1,
-}
+// let sheepObject: { name: string; age: number } = {
+//   name: 'sheep1',
+//   age: 1,
+// }
 
-sheepObject.age = 3
+// sheepObject.age = 3
 
-interface Student {
-  name: string
-  age: number
-  isVerified: boolean
-}
+// interface Student {
+//   name: string
+//   age: number
+//   isVerified: boolean
+// }
 
 app.use(express.json())
 app.use(cors())
