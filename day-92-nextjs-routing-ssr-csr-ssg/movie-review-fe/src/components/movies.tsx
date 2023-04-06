@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import React from "react";
+import React from 'react'
 import styles from '@/styles/Home.module.css'
+import Link from 'next/link'
 
 interface IAwards {
   wins: number
@@ -45,28 +46,39 @@ interface IMovies {
   tomatoes: ITomatoes
 }
 
-
 export default function Movies(): JSX.Element {
   const [movies, setMovies] = useState<IMovies[]>([])
 
   useEffect(() => {
-    fetch("http://localhost:8080/movies/list")
-    .then((res) => res.json())
-    .then((data) => setMovies(data))
+    fetch('http://localhost:8080/movies/list')
+      .then((res) => res.json())
+      .then((data) => setMovies(data))
   }, [movies])
- 
+
   return (
     <div>
       <h1>Movies</h1>
-      <div className={styles.movies}> 
-        
-      {movies.map((d, index) => (
-        <div key={index}>
-          <img src={d.poster} className={styles.poster}/>
-          <h4 className={styles.rating}>{d.imdb.rating}</h4>
-          <h3 className={styles.title}>{d.title}</h3>
-        </div>
-      ))}
+
+      <div className='flex flex-wrap max-w-screen-xl'>
+        {movies.map((d, index) => (
+          <div key={index}>
+            <div className='px-4 hover:animate-pulse'>
+              <img src={d.poster} className='h-96 rounded shadow-2xl w-72' />
+              <div className=' w-64 p-2 my-3 text-black font-mono'>
+                <div className='flex'>
+                  <img
+                    src='https://www.rottentomatoes.com/assets/pizza-pie/images/icons/tomatometer/certified_fresh-notext.56a89734a59.svg'
+                    className='w-8 mr-2'
+                  />{' '}
+                  <a>{d.imdb.rating}</a>
+                </div>
+                <Link href={{ pathname: '/movies/' + d._id }} passHref>
+                  <h3 className=''>{d.title}</h3>
+                </Link>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   )
