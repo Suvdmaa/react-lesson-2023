@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import React from 'react'
-import styles from '@/styles/Home.module.css'
 import Link from 'next/link'
 
 interface IAwards {

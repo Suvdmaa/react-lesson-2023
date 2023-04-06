@@ -3,7 +3,7 @@ import { Request, Response } from 'express'
 
 export const getMovies = async (req: Request, res: Response) => {
   const page: number = Number(req.query.page) || 0
-  const moviesPerPage: number = Number(req.query.moviesPerPage) || 30
+  const moviesPerPage: number = Number(req.query.moviesPerPage) || 50
   try {
     const movies = await MoviesModel.find()
       .limit(moviesPerPage)
