@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import React from 'react'
 import Link from 'next/link'
+import Typography from '@mui/material/Typography'
+import Pagination from '@mui/material/Pagination'
+import Stack from '@mui/material/Stack'
 
 interface IAwards {
   wins: number
@@ -52,8 +55,19 @@ export default function Movies(): JSX.Element {
     fetch('http://localhost:8080/movies/list')
       .then((res) => res.json())
       .then((data) => setMovies(data))
-  }, [movies])
+  }, [])
 
+  async function sendPage(page: any) {
+    const URL = `http://localhost:8080/movies/list?page=${page}`
+    const FETCHED_DATA = await fetch(URL)
+    const FETCHED_JSON = await FETCHED_DATA.json()
+    setMovies(FETCHED_JSON)
+  }
+  const [page, setPage] = React.useState(1)
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    sendPage(value)
+    setPage(value)
+  }
   return (
     <div>
       <h1>Movies</h1>
@@ -79,6 +93,9 @@ export default function Movies(): JSX.Element {
           </div>
         ))}
       </div>
+      <Stack spacing={2} className='text-center mx-96 m-5 '>
+        <Pagination count={10} page={page} onChange={handleChange} />
+      </Stack>
     </div>
   )
 }

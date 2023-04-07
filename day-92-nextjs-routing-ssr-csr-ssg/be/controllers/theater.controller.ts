@@ -16,7 +16,7 @@ export const getTheaters = async (req: Request, res: Response) => {
 
 export const getTheaterById = async (req: Request, res: Response) => {
   try {
-    console.log(req.params.id)
+    // console.log(req.params.id)
     const theater = await TheaterModel.find({
       theaterId: Number(req.params.id),
     })
