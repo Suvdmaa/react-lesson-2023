@@ -14,6 +14,17 @@ export const getComments = async (req: Request, res: Response) => {
   }
 }
 
+// export const getCommentByMovieId = async (req: Request, res: Response) => {
+//   try{
+//     const comments = await CommentsModel.find({
+//       movie_id: req.params.id
+//     })
+//     res.status(200).json(comments)
+//   } catch(error){
+//     res.status(404).json({data: []})
+//   }
+// }
+
 export const getCommentsById = async (req: Request, res: Response) => {
   try {
     const comments = await CommentsModel.find({

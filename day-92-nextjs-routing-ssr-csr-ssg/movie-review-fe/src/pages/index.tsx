@@ -1,27 +1,29 @@
-import NavigationBar from '@/components/navigation.bar'
+import NavigationBar from "@/components/navigation.bar";
 // import Link from 'next/link'
-import React from 'react'
-import styles from '@/styles/Home.module.css'
-import Movies from '../components/movies'
+import React from "react";
+import styles from "@/styles/Home.module.css";
+import Movies from "../components/movies";
+import Footer from "@/components/footer";
 
 export async function getServerSideProps() {
-  const theaterRequest = await fetch('http://localhost:8080/theaters/list')
-  const theaterData = await theaterRequest.json()
-  console.log(theaterData)
+  const theaterRequest = await fetch("http://localhost:8080/theaters/list");
+  const theaterData = await theaterRequest.json();
+  console.log(theaterData);
   return {
     props: {
       theater: theaterData,
     },
-  }
+  };
 }
 
 export default function Home(props: any): JSX.Element {
-  console.log(props)
+  console.log(props);
   // const side = typeof window ? 'client' : 'server'
   return (
     <div className={styles.main}>
       <NavigationBar />
       <Movies />
+      <Footer />
       {/* <div>Welcome!</div>
       <div>You're currently on the {side}</div>
       <Link href='/about'>About Page</Link>
@@ -40,5 +42,5 @@ export default function Home(props: any): JSX.Element {
         Post Page
       </Link> */}
     </div>
-  )
+  );
 }
